@@ -9,35 +9,39 @@
   <body>
     <header>
       <h1>ToDo-deledokie</h1>
-      <p>Goede slogan hier</p>
+      <img src="logo.png" alt="The logo of our app">
+      
       <a href="splashscreen.html">Logout</a>
     </header>
 
     <main>
       <section class='comment-input'>
         <form>
-         Task<br>
+         Task
          <input type="text" name="Task">
          <br>
-         Important <br>
+         Important 
          <input type="radio" name="Important" value="Yes">Yes
-         <br>
          <input type="radio" name="Important" value="No">No
          <br>
-         Deadline
+         Remind me 
+         <input type="radio" name="Reminder" value="Yes">Yes
+         <input type="radio" name="Reminder" value="No">No
+         <br>Deadline
          <br>
          <input type="date" name="Deadline">
          <br>
+         Notes
+         <br>
+         <input type="text" name="Notes">
+         <br>
          <input type="submit" value="Add">
+         <input type="submit" value="Delete">
         </form>
       </section>
 
-      <section class='buttons'>
-      	<button type="button">Sort by Deadline</button>
-      	<br>
-      	<button type="button">Sort by Importance</button>
-      </section>
       
+
 
       <section class='tasks'>
         <p>Task 1</p>
