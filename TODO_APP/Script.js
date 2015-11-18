@@ -2,7 +2,7 @@ function todoTask(taskname,important,reminder,deadline,notes,done){
 	this.taskname = taskname;
 	this.important = important;
 	this.reminder = reminder;
-	this.deadline = dealine;
+	this.deadline = deadline;
 	this.notes = notes;
 	this.done = done;
 	
@@ -19,7 +19,7 @@ function todoTask(taskname,important,reminder,deadline,notes,done){
 }
 
 function readNewTask(){
-	alert("you clicked a buttton");
+
 	var form = document.getElementById("frm1");
 	var taskname = form.elements[1].value;
 	var important = form.elements[2].vale;
@@ -31,8 +31,8 @@ function readNewTask(){
 	var task = todoTask(taskname,important,reminder,deadline,notes,done);
 	todoTaskList.addTask(task);
 	todoTaskList.update();
-	alert("you clicked a buttton");
 }
+
 
 var todoTaskList = (function(){
 	
@@ -41,16 +41,22 @@ var todoTaskList = (function(){
 	return{
 		addTask: function(task){
 			tasks.push(task);
-		}
+		},
 		
 		update: function(){
+			
 			var tasktable = document.getElementById("Task");
+			
 			while(tasktable.firstChild){
 				tasktable.removeChild(tasktable.firstChild);
 			}
+			
 			for(i = 0; i < tasks.length(); i++){
 				tasktable.appendChild(tasks[i].toTable);
 			}
+			
 		}
 	}
 })();
+
+
