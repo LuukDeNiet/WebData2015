@@ -49,14 +49,24 @@ var todoTaskList = (function(){
 			for(var i = 0; i < tasks.length; i++){
 				var p = document.createElement("p");
 				var node = document.createElement("a");
-				node.href = "javascript:popupFunctie(" + i+ ");";
+				node.href = "javascript:todoTaskList.deleteTask(" + i+ ");";
 				var textnode = document.createTextNode(tasks[i].taskname);
 				p.appendChild(node);
 				node.appendChild(textnode);
 				tasklist.appendChild(p);
 			}
 			
+		},
+
+		deleteTask: function(i){
+			tasks.splice(i,1);
+			todoTaskList.update();
+		},
+
+		returnTask: function(i){
+			return tasks[i];
 		}
+
 	}
 })();
 
