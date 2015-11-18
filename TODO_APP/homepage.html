@@ -7,6 +7,7 @@
   </head>
 
   <body>
+	<script src="Script.js"></script>
     <header>
       <h1>ToDo-deledokie</h1>
       <img src="logo.png" alt="The logo of our app" height="80" width="80">
@@ -16,7 +17,7 @@
 
     <main>
       <section class='task-input'>
-        <form>
+        <form id="frm1">
          Task
          <input type="text" name="Task">
          <br>
@@ -35,20 +36,16 @@
          <br>
          <input type="text" name="Notes">
          <br>
-         <input type="submit" value="Add">
-         <input type="submit" value="Delete">
         </form>
+		<button type='button' onclick="readNewTask()">Voeg task toe</button>
+		<p class='demo'></p>
       </section>
 
       
 
 
-      <section class='tasks'>
-        <p>Task 1</p>
-        <p>Nog een task</p>
-        <p>Yet another task</p>
-        <p>Here is another one!</p>
-      </section>
+      <table class='tasks'>
+      </table>
     </main>
 
     <footer>
