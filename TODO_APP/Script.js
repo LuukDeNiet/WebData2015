@@ -47,10 +47,13 @@ var todoTaskList = (function(){
 			}
 			
 			for(var i = 0; i < tasks.length; i++){
-				var node = document.createElement("p");
+				var p = document.createElement("p");
+				var node = document.createElement("a");
+				node.href = "javascript:popupFunctie(" + i+ ");";
 				var textnode = document.createTextNode(tasks[i].taskname);
+				p.appendChild(node);
 				node.appendChild(textnode);
-				tasklist.appendChild(node);
+				tasklist.appendChild(p);
 			}
 			
 		}
@@ -58,3 +61,7 @@ var todoTaskList = (function(){
 })();
 
 
+function popupFunctie(i){
+ alert(i);
+
+}
