@@ -7,28 +7,23 @@ function todoTask(taskname,important,reminder,deadline,notes,done){
 	this.done = done;
 	
 	this.toTable = function(){
-		var tableLine = document.createElement("tr");
-		var tableBlock = document.createElement("td");
-		tableBlock.appendChild(taskname);
-		var tableBlock2 = document.createElement("td");
-		tableBlock.appendChild(deadline);
-		tableLine.appendChild(tableBlock);
-		tableLine.appendChild(tableBlock2);
 		return tableLine;
 	}
+	
 }
 
 function readNewTask(){
 
 	var form = document.getElementById("frm1");
-	var taskname = form.elements[1].value;
-	var important = form.elements[2].vale;
-	var reminder = form.elements[3].vale;
-	var deadline = form.elements[4].vale;
-	var notes = form.elements[5].vale;
-	var done = form.elements[6].vale;
+	var taskname = form.elements[0].value;
+	var important = form.elements[1].value;
+	var reminder = form.elements[2].value;
+	var deadline = form.elements[3].value;
+	var notes = form.elements[4].value;
+	var done = form.elements[5].value;
 	
-	var task = todoTask(taskname,important,reminder,deadline,notes,done);
+
+	var task = new todoTask(taskname,important,reminder,deadline,notes,done);
 	todoTaskList.addTask(task);
 	todoTaskList.update();
 }
@@ -45,14 +40,17 @@ var todoTaskList = (function(){
 		
 		update: function(){
 			
-			var tasktable = document.getElementById("Task");
+			var tasklist = document.getElementById("Task");
 			
-			while(tasktable.firstChild){
-				tasktable.removeChild(tasktable.firstChild);
+			while(tasklist.firstChild){
+				tasklist.removeChild(tasklist.firstChild);
 			}
 			
-			for(i = 0; i < tasks.length(); i++){
-				tasktable.appendChild(tasks[i].toTable);
+			for(var i = 0; i < tasks.length; i++){
+				var node = document.createElement("p");
+				var textnode = document.createTextNode(tasks[i].taskname);
+				node.appendChild(textnode);
+				tasklist.appendChild(node);
 			}
 			
 		}
