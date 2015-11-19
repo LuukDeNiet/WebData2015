@@ -39,12 +39,32 @@ var todoTaskList = (function(){
 		},
 		
 		update: function(){
-			
+
+			todoTaskList.clearScreen();
+			todoTaskList.writeAll();								
+		},
+
+		deleteTask: function(i){
+			tasks.splice(i,1);
+			todoTaskList.update();
+		},
+
+		returnTask: function(i){
+			return tasks[i];
+		},
+
+		clearScreen: function(){
+
 			var tasklist = document.getElementById("Task");
 			
 			while(tasklist.firstChild){
 				tasklist.removeChild(tasklist.firstChild);
-			}
+			}          
+		},
+
+		writeAll: function(){
+
+			var tasklist = document.getElementById("Task");
 			
 			for(var i = 0; i < tasks.length; i++){
 				var p = document.createElement("p");
@@ -55,16 +75,31 @@ var todoTaskList = (function(){
 				node.appendChild(textnode);
 				tasklist.appendChild(p);
 			}
-			
 		},
 
-		deleteTask: function(i){
-			tasks.splice(i,1);
+		setDone: function(i){
+			tasks[i].done = true;
 			todoTaskList.update();
 		},
 
-		returnTask: function(i){
-			return tasks[i];
+		sortImportance: function(){
+			var high = [];
+			var normal = [];
+
+			for(var i = 0; i < tasks.length; i++){
+				if(tasks[i].priority == true){
+					high.push(tasks[i]);
+				} else{
+					normal.push(tasks[i]);
+				}
+			}
+
+			tasks = [];
+			tasks = high.concat(normal);
+
+			todoTaskList.update();
+
+
 		}
 
 	}
