@@ -30,6 +30,7 @@ function readNewTask(){
 	var task = new todoTask(taskname,important,reminder,deadline,notes);
 	todoTaskList.addTask(task);
 	todoTaskList.update();
+	form.reset();
 }
 
 
