@@ -1,13 +1,17 @@
 function todoTask(taskname,important,reminder,deadline,notes){
-	this.taskname = taskname;
+	this.taskname = taskname;//string
 	this.important = important; // boolean
 	this.reminder = reminder; // boolean
 	this.deadline = deadline; 
-	this.notes = notes;
+	this.notes = notes; //string
 	this.done = false; // boolean
 	
 	this.toTable = function(){
 		return tableLine;
+	}
+
+	this.setDone = function(){
+		this.done = true;
 	}
 	
 }
@@ -16,8 +20,8 @@ function readNewTask(){
 
 	var form = document.getElementById("frm1");
 	var taskname = form.elements[0].value;
-	var important = form.elements[1].value;
-	var reminder = form.elements[2].value;
+	var important = document.getElementsByName("Important")[0].checked;
+	var reminder = document.getElementsByName("Reminder")[0].checked;
 	var deadline = form.elements[5].value;
 	var notes = form.elements[6].value;
 	
@@ -77,17 +81,12 @@ var todoTaskList = (function(){
 			}
 		},
 
-		setDone: function(i){
-			tasks[i].done = true;
-			todoTaskList.update();
-		},
-
 		sortImportance: function(){
 			var high = [];
 			var normal = [];
 
 			for(var i = 0; i < tasks.length; i++){
-				if(tasks[i].priority == true){
+				if(tasks[i].important == true){
 					high.push(tasks[i]);
 				} else{
 					normal.push(tasks[i]);
