@@ -171,7 +171,7 @@ function popupFunctie(i){
 	var task = todoTaskList.returnTask(i);
 	var important1;
 	var imporant2;
-	if(task.important = true){
+	if(task.important){
 		important1  = "checked";
 		important2 = "";
 	}
@@ -181,7 +181,7 @@ function popupFunctie(i){
 	}
 	var reminder1;
 	var reminder2;
-	if(task.reminder = true){
+	if(task.reminder){
 		reminder1  = "checked";
 		reminder2 = "";
 	}
