@@ -6,9 +6,7 @@ function todoTask(taskname,important,reminder,deadline,notes){
 	this.notes = notes; //string
 	this.done = false; // boolean
 	
-	this.toTable = function(){
-		return tableLine;
-	}
+	
 
 	this.setDone = function(){
 		this.done = true;
@@ -50,7 +48,7 @@ var todoTaskList = (function(){
 		update: function(){
 
 			todoTaskList.clearScreen();
-			todoTaskList.writeAll();								
+			todoTaskList.writeTable();								
 		},
 
 		deleteTask: function(i){
@@ -104,7 +102,61 @@ var todoTaskList = (function(){
 			todoTaskList.update();
 
 
-		}
+		},
+
+		writeTable: function(){
+			var tasklist = document.getElementById("Task");
+    var body = document.body,
+        tbl  = document.createElement('table');
+    tbl.style.width  = '100%';
+    tbl.style.border = '1px solid black';
+
+    for(var i = 0; i < tasks.length; i++){
+        var tr = tbl.insertRow();
+        
+
+            
+                var td = tr.insertCell();
+                td.appendChild(document.createTextNode(tasks[i].taskname));
+                td.style.border = '1px solid black';
+               
+               var td = tr.insertCell();
+                td.appendChild(document.createTextNode(tasks[i].important));
+                td.style.border = '1px solid black';
+                var td = tr.insertCell();
+                td.appendChild(document.createTextNode(tasks[i].reminder));
+                td.style.border = '1px solid black';
+                var td = tr.insertCell();
+                td.appendChild(document.createTextNode(tasks[i].deadline));
+                td.style.border = '1px solid black';
+                var td = tr.insertCell();
+                td.appendChild(document.createTextNode(tasks[i].notes));
+                td.style.border = '1px solid black';
+                var td = tr.insertCell();
+                td.appendChild(document.createTextNode(tasks[i].done));
+                td.style.border = '1px solid black';
+            
+        }
+
+
+    var header = tbl.createTHead();
+    var row = header.insertRow(0);
+    var cell = row.insertCell(0);
+    cell.innerHTML = "<b>Taskname</b>";
+    var cell = row.insertCell(1);
+    cell.innerHTML = "<b>Important</b>";
+    var cell = row.insertCell(2);
+    cell.innerHTML = "<b>Reminder</b>";
+    var cell = row.insertCell(3);
+    cell.innerHTML = "<b>Duedate</b>";
+    var cell = row.insertCell(4);
+    cell.innerHTML = "<b>Notes</b>";
+    var cell = row.insertCell(5);
+    cell.innerHTML = "<b>Done</b>";
+
+
+    tasklist.appendChild(tbl);
+}
 
 	}
 })();
@@ -138,6 +190,11 @@ function popupFunctie(i){
 	popup.innerHTML =  '<form id="editfrm">Task<input type="text" name="Task" value="'+ task.taskname +'"><br>Important <input type="radio" name="Important" ' + important1 + '>Yes<input type="radio" name="Important" ' + important2 + '>No<br>Remind me <input type="radio" name="Reminder" value="Yes" ' + reminder1 + '>Yes<input type="radio" name="Reminder" value="No" ' + reminder2 + '>No<br>Deadline<br><input type="date" name="Deadline" value="' + task.deadline +'"><br>Notes<br><input type="text" name="Notes" value="' + task.notes + '"><br></form> <button type="button" onclick="editTask(' + i + ');emptyPopup()">Save changes</button><button type="button" onclick="todoTaskList.deleteTask(' + i + ');emptyPopup();">Delete task</button><button type="button" onclick="emptyPopup();">Discard changes</button>';
 }
 
+<<<<<<< HEAD
+}
+
+window.onload = todoTaskList.update
+=======
 function emptyPopup(){
 	var popup = document.getElementById("popup");
 	popup.style = "popupOFF";
@@ -157,3 +214,4 @@ function editTask(i){
 	todoTaskList.editTask(task,i);
 	todoTaskList.update();
 }
+>>>>>>> cd63c6a81d039d88114b9c88a5614307c58f8fdc
