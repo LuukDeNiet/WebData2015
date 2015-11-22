@@ -8,6 +8,7 @@ function todoTask(taskname,important,reminder,deadline,notes){
 	
 	this.setDone = function(){
 		this.done = true;
+		todoTaskList.update();
 	}
 	
 }
@@ -102,6 +103,12 @@ var todoTaskList = (function(){
 
 		},
 
+		toggleDone: function(i){
+			tasks[i].done = !tasks[i].done;
+			todoTaskList.update();
+
+		},
+
 		writeTable: function(){
 			var tasklist = document.getElementById("Task");
 			var body = document.body,
@@ -139,9 +146,12 @@ var todoTaskList = (function(){
                 td.appendChild(document.createTextNode(tasks[i].notes));
                 td.style.border = '1px solid black';
                 var td = tr.insertCell();
-                td.appendChild(document.createTextNode(tasks[i].done));
                 td.style.border = '1px solid black';
-            
+                var node = document.createElement("a");
+				node.href = "javascript:todoTaskList.toggleDone(" + i+ ");";
+				var textnode = document.createTextNode(tasks[i].done);
+				td.appendChild(node);
+				node.appendChild(textnode);
 				}
 
 
