@@ -207,7 +207,6 @@ function popupFunctie(i){
 	}
 }
 
-
 window.onload = todoTaskList.update
 
 function emptyPopup(){
