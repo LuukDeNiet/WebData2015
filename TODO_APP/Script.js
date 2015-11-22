@@ -195,12 +195,7 @@ function popupFunctie(i){
 	popup.innerHTML =  '<form id="editfrm">Task<input type="text" name="Task" value="'+ task.taskname +'"><br>Important <input type="radio" name="Important" ' + important1 + '>Yes<input type="radio" name="Important" ' + important2 + '>No<br>Remind me <input type="radio" name="Reminder" value="Yes" ' + reminder1 + '>Yes<input type="radio" name="Reminder" value="No" ' + reminder2 + '>No<br>Deadline<br><input type="date" name="Deadline" value="' + task.deadline +'"><br>Notes<br><input type="text" name="Notes" value="' + task.notes + '"><br></form> <button type="button" onclick="editTask(' + i + ');emptyPopup()">Save changes</button><button type="button" onclick="todoTaskList.deleteTask(' + i + ');emptyPopup();">Delete task</button><button type="button" onclick="emptyPopup();">Discard changes</button>';
 }
 
-<<<<<<< HEAD
 
-
-
-=======
->>>>>>> f2236a6d8d7345b120d55dba07b7ed2c76adac97
 window.onload = todoTaskList.update
 
 function emptyPopup(){
@@ -222,7 +217,4 @@ function editTask(i){
 	todoTaskList.editTask(task,i);
 	todoTaskList.update();
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> f2236a6d8d7345b120d55dba07b7ed2c76adac97
