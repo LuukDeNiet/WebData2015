@@ -147,11 +147,13 @@ function emptyPopup(){
 function editTask(i){
 	var form = document.getElementById("editfrm");
 	var taskname = form.elements[0].value;
-	var important = form.elements[1].value;
-	var reminder = form.elements[2].value;
+	var important = document.getElementsByName("Important")[0].checked;
+	var reminder = document.getElementsByName("Reminder")[0].checked;
 	var deadline = form.elements[5].value;
 	var notes = form.elements[6].value;
+	
 	var task = new todoTask(taskname,important,reminder,deadline,notes);
+	
 	todoTaskList.editTask(task,i);
 	todoTaskList.update();
 }
