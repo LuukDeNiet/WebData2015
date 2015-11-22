@@ -117,8 +117,16 @@ var todoTaskList = (function(){
 
             
                 var td = tr.insertCell();
-                td.appendChild(document.createTextNode(tasks[i].taskname));
+                
                 td.style.border = '1px solid black';
+                var node = document.createElement("a");
+				node.href = "javascript:popupFunctie(" + i+ ");";
+				var textnode = document.createTextNode(tasks[i].taskname);
+				td.appendChild(node);
+				node.appendChild(textnode);
+
+
+
                
                var td = tr.insertCell();
                 td.appendChild(document.createTextNode(tasks[i].important));
@@ -190,11 +198,11 @@ function popupFunctie(i){
 	popup.innerHTML =  '<form id="editfrm">Task<input type="text" name="Task" value="'+ task.taskname +'"><br>Important <input type="radio" name="Important" ' + important1 + '>Yes<input type="radio" name="Important" ' + important2 + '>No<br>Remind me <input type="radio" name="Reminder" value="Yes" ' + reminder1 + '>Yes<input type="radio" name="Reminder" value="No" ' + reminder2 + '>No<br>Deadline<br><input type="date" name="Deadline" value="' + task.deadline +'"><br>Notes<br><input type="text" name="Notes" value="' + task.notes + '"><br></form> <button type="button" onclick="editTask(' + i + ');emptyPopup()">Save changes</button><button type="button" onclick="todoTaskList.deleteTask(' + i + ');emptyPopup();">Delete task</button><button type="button" onclick="emptyPopup();">Discard changes</button>';
 }
 
-<<<<<<< HEAD
-}
+
+
 
 window.onload = todoTaskList.update
-=======
+
 function emptyPopup(){
 	var popup = document.getElementById("popup");
 	popup.style = "popupOFF";
@@ -212,4 +220,4 @@ function editTask(i){
 	todoTaskList.editTask(task,i);
 	todoTaskList.update();
 }
->>>>>>> cd63c6a81d039d88114b9c88a5614307c58f8fdc
+
