@@ -209,16 +209,6 @@ var todoTaskList = (function(){
 
 function popupFunctie(i){
 	var task = todoTaskList.returnTask(i);
-	var important1;
-	var imporant2;
-	if(task.important){
-		important1  = "checked";
-		important2 = "";
-	}
-	else{
-		important1 = "";
-		important2 = "checked";
-	}
 	var reminder1;
 	var reminder2;
 	if(task.reminder){
@@ -232,9 +222,20 @@ function popupFunctie(i){
 	
 	var popup = document.getElementById("popup");
 	popup.style = "popupON";
-	popup.innerHTML =  '<form id="editfrm">Task<input type="text" name="Task" value="'+ task.taskname +'"><br>Important <input type="radio" name="Important" ' + important1 + '>Yes<input type="radio" name="Important" ' + important2 + '>No<br>Remind me <input type="radio" name="Reminder" value="Yes" ' + reminder1 + '>Yes<input type="radio" name="Reminder" value="No" ' + reminder2 + '>No<br>Deadline<br><input type="date" name="Deadline" value="' + task.deadline +'"><br>Notes<br><input type="text" name="Notes" value="' + task.notes + '"><br></form> <button type="button" onclick="editTask(' + i + ');emptyPopup()">Save changes</button><button type="button" onclick="todoTaskList.deleteTask(' + i + ');emptyPopup();">Delete task</button><button type="button" onclick="emptyPopup();">Discard changes</button>';
+	popup.innerHTML =  '<form id="editfrm">Task<input type="text" name="Task" value="'+ task.taskname +'"><br>Important <input type="radio" name="Importantedit">Yes<input type="radio" name="Importantedit">No<br>Remind me <input type="radio" name="Reminderedit" value="Yes">Yes<input type="radio" name="Reminderedit" value="No">No<br>Deadline<br><input type="date" name="Deadline" value="' + task.deadline +'"><br>Notes<br><input type="text" name="Notes" value="' + task.notes + '"><br></form> <button type="button" onclick="editTask(' + i + ');emptyPopup()">Save changes</button><button type="button" onclick="todoTaskList.deleteTask(' + i + ');emptyPopup();">Delete task</button><button type="button" onclick="emptyPopup();">Discard changes</button>';
+	if(task.important){
+		document.getElementsByName("Importantedit")[0].checked = true;
+	}
+	else{
+		document.getElementsByName("Importantedit")[1].checked = true;
+	}
+	if(task.reminder){
+		document.getElementsByName("Reminderedit")[0].checked = true;
+	}
+	else{
+		document.getElementsByName("Reminderedit")[1].checked = true;
+	}
 }
-
 
 window.onload = todoTaskList.update
 
@@ -247,8 +248,8 @@ function emptyPopup(){
 function editTask(i){
 	var form = document.getElementById("editfrm");
 	var taskname = form.elements[0].value;
-	var important = document.getElementsByName("Important")[0].checked;
-	var reminder = document.getElementsByName("Reminder")[0].checked;
+	var important = document.getElementsByName("Importantedit")[0].checked;
+	var reminder = document.getElementsByName("Reminderedit")[0].checked;
 	var deadline = form.elements[5].value;
 	var notes = form.elements[6].value;
 	
