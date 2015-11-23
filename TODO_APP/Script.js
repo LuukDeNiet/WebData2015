@@ -19,7 +19,7 @@ function readNewTask(){
 	var taskname = form.elements[0].value;
 	var important = document.getElementsByName("Important")[0].checked;
 	var reminder = document.getElementsByName("Reminder")[0].checked;
-	var deadline = form.elements[5].value;
+	var deadline = new Date(form.elements[5].value);
 	var notes = form.elements[6].value;
 	
 	
@@ -103,6 +103,27 @@ var todoTaskList = (function(){
 
 		},
 
+		sortDate: function(){
+			var sorted = [];
+			var totaal = tasks.length;
+			var index;
+
+			for (var i = 0; i<totaal; i++){
+				index = 0;
+				for(var j = 0;j<tasks.length;j++){
+					if(tasks[index].deadline>tasks[j].deadline){
+						index = clone(j);
+					}
+				}
+				sorted.push(tasks[index]);
+				tasks.splice(index,1);
+			}
+			tasks = clone(sorted);
+			
+			todoTaskList.update();
+
+		},
+
 		toggleDone: function(i){
 			tasks[i].done = !tasks[i].done;
 			todoTaskList.update();
@@ -140,7 +161,7 @@ var todoTaskList = (function(){
                 td.appendChild(document.createTextNode(tasks[i].reminder));
                 td.style.border = '1px solid black';
                 var td = tr.insertCell();
-                td.appendChild(document.createTextNode(tasks[i].deadline));
+                td.appendChild(document.createTextNode(tasks[i].deadline.toDateString()));
                 td.style.border = '1px solid black';
                 var td = tr.insertCell();
                 td.appendChild(document.createTextNode(tasks[i].notes));
@@ -159,12 +180,21 @@ var todoTaskList = (function(){
 			var row = header.insertRow(0);
 			var cell = row.insertCell(0);
 			cell.innerHTML = "<b>Taskname</b>";
+
 			var cell = row.insertCell(1);
-			cell.innerHTML = "<b>Important</b>";
+			var node = document.createElement("a");
+			node.href = "javascript:todoTaskList.sortImportance();";
+			var textnode = document.createTextNode("Important");
+			cell.appendChild(node);
+			node.appendChild(textnode);
 			var cell = row.insertCell(2);
 			cell.innerHTML = "<b>Reminder</b>";
 			var cell = row.insertCell(3);
-			cell.innerHTML = "<b>Duedate</b>";
+			var node = document.createElement("a");
+			node.href = "javascript:todoTaskList.sortDate();";
+			var textnode = document.createTextNode("Deadline");
+			cell.appendChild(node);
+			node.appendChild(textnode);
 			var cell = row.insertCell(4);
 			cell.innerHTML = "<b>Notes</b>";
 			var cell = row.insertCell(5);
@@ -228,3 +258,34 @@ function editTask(i){
 	todoTaskList.update();
 }
 
+function clone(obj) {
+    // Handle the 3 simple types, and null or undefined
+    if (null == obj || "object" != typeof obj) return obj;
+
+    // Handle Date
+    if (obj instanceof Date) {
+        var copy = new Date();
+        copy.setTime(obj.getTime());
+        return copy;
+    }
+
+    // Handle Array
+    if (obj instanceof Array) {
+        var copy = [];
+        for (var i = 0, len = obj.length; i < len; i++) {
+            copy[i] = clone(obj[i]);
+        }
+        return copy;
+    }
+
+    // Handle Object
+    if (obj instanceof Object) {
+        var copy = {};
+        for (var attr in obj) {
+            if (obj.hasOwnProperty(attr)) copy[attr] = clone(obj[attr]);
+        }
+        return copy;
+    }
+
+    throw new Error("Unable to copy obj! Its type isn't supported.");
+}
