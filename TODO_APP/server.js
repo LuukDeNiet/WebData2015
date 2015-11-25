@@ -2,10 +2,11 @@
 var express = require("express");
 var url = require("url");
 var http = require("http");
+var fs = require("fs");
 
 var port = 3000;
 var app = express();
-app.use(express.static(__dirname + "/client"));
+app.use(express.static(__dirname + "/Client"));
 http.createServer(app).listen(port);
 
 var todos = [];
@@ -18,6 +19,10 @@ app.get("/todos", function (req, res) {
 	res.json(todos);
 });
 
+//return homepage html
+app.get("/", function (req,res) {
+	res.sendFile("/Client/splashscreen.html", {root: __dirname})
+});
 //add todo to the server
 app.get("/addtodo", addTask);
 
