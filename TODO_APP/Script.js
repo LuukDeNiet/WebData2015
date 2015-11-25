@@ -286,3 +286,8 @@ function clone(obj) {
 
     throw new Error("Unable to copy obj! Its type isn't supported.");
 }
+
+setInterval(function () {
+	console.log("Fetching the todo list from the server.");
+	$.getJSON("todos", console.log("Get Todo"));
+}, 2000);

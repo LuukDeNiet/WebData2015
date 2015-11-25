@@ -45,7 +45,7 @@ function addTask(req, res) {
 	var query = url_parts.query;
 	
 	if(query["taskname"]!==undefined) {
-		var tx = new todoTask(query["taskname"],query["important"] === "true",query["reminder"] === "true",query["deadline"],query["notes"]);
+		var tx = new todoTask(query["taskname"],query["important"] === "true",query["reminder"] === "true",new Date(query["deadline"]),query["notes"]);
 		todos.push(tx);
 		console.log("Added " + tx.taskname);
 		res.end("Todo added successfully");
@@ -76,3 +76,4 @@ function updateTask(res, req){
 	deleteTask(res, req);
 	addTask(res, req);
 };
+
