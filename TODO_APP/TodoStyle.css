@@ -114,7 +114,7 @@ li::first-letter{
 	position: absolute;
 	left: 25px;
 	top: 135px;
-	width: 30%;
+	width: 200px;
 	line-height: 175%;
 	font: 20pt;
 }
