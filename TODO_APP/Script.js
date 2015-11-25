@@ -6,11 +6,7 @@ function todoTask(taskname,important,reminder,deadline,notes){
 	this.notes = notes; //string
 	this.done = false; // boolean
 	
-	this.setDone = function(){
-		this.done = true;
-		todoTaskList.update();
-	}
-	
+		
 }
 
 function readNewTask(){
@@ -290,3 +286,8 @@ function clone(obj) {
 
     throw new Error("Unable to copy obj! Its type isn't supported.");
 }
+
+setInterval(function () {
+	console.log("Fetching the todo list from the server.");
+	$.getJSON("todos", console.log("Get Todo"));
+}, 2000);
