@@ -221,7 +221,7 @@ function popupFunctie(i){
 	}
 	
 	var popup = document.getElementById("popup");
-	popup.style = "popupON";
+	popup.classList.add("popup");
 	popup.innerHTML =  '<form id="editfrm">Task<input type="text" name="Task" value="'+ task.taskname +'"><br>Important <input type="radio" name="Importantedit">Yes<input type="radio" name="Importantedit">No<br>Remind me <input type="radio" name="Reminderedit" value="Yes">Yes<input type="radio" name="Reminderedit" value="No">No<br>Deadline<br><input type="text" name="Deadline" value="' + task.deadline +'"><br>Notes<br><input type="text" name="Notes" value="' + task.notes + '"><br></form> <button type="button" onclick="editTask(' + i + ');emptyPopup()">Save changes</button><button type="button" onclick="todoTaskList.deleteTask(' + i + ');emptyPopup();">Delete task</button><button type="button" onclick="emptyPopup();">Discard changes</button>';
 	if(task.important){
 		document.getElementsByName("Importantedit")[0].checked = true;
@@ -241,7 +241,7 @@ window.onload = todoTaskList.update
 
 function emptyPopup(){
 	var popup = document.getElementById("popup");
-	popup.style = "popupOFF";
+	popup.classList.remove("popup");
 	popup.innerHTML = "";
 }
 

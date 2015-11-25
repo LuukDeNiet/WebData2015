@@ -32,11 +32,20 @@ h1{
 	font-size: 32pt;
 }
 
+/*animated logo*/
+@keyframes animatedlogo {
+    from {top: -200px;}
+    to {top: 8px;}
+}
+
 .logo{
 	position: absolute;
 	left: 425px;
-	top: 5px;
+	top: 8px;
+	animation-name:animatedlogo;
+	animation-duration: 1s;
 }
+
 
 .username{
 	display: inline-block;
@@ -44,15 +53,18 @@ h1{
 	margin-right: 30px;
 }
 
-#inputusername,#inputpassword{
+#inputusername{
 	height: 30px;
 	width: 220px;
 	font-size: 12pt;
-	font-color: light grey;
 }
 
-#inputusername,#inputpassword:active{
-	
+#inputusername,textarea{
+	color: #a0a0a0;
+}
+
+#inputusername:focus{
+	color: black;
 }
 
 .password{
@@ -60,7 +72,9 @@ h1{
 }
 
 #inputpassword{
+	height: 30px;
 	width: 180px;
+	font-size: 12pt;
 }
 
 .loginlink1{
@@ -71,16 +85,54 @@ h1{
 	font-size: 18pt;
 }
 
+.logoutlink{
+	position: absolute;
+	right: 150px;
+	bottom: 25px;
+	font-size: 18pt;
+}
+
 main{
 	width: 100%;
-	padding: 50px;
+	padding: 25px;
 	display: inline-block;
+}
+
+li::first-letter{
+	color: #0000FF;
 }
 
 .splashscreenlogo{
 	position: absolute;
 	right: 50px;
 	top: 150px;
+}
+
+.task-input{
+	position: absolute;
+	left: 25px;
+	top: 135px;
+	width: 10%;
+}
+
+#Task{
+	position: absolute;
+	top: 135px;
+	right: 25px;
+	width: 85%;
+	height: 100px;
+}
+
+.popup{
+	z-index:10;
+	position: absolute;
+	top: 100px;
+	left: 7.5%;
+	width: 80%;
+	height: 70%;
+	border: 2px solid black;
+	background-color: white;
+	padding: 50px;
 }
 
 footer{

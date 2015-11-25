@@ -2,17 +2,19 @@
 <html>
   <head>
     <title>ToDo-deledokie</title>
-
-    
+	<link rel="stylesheet" type="text/css" href="TodoStyle.css">
   </head>
 
   <body>
 	<script type="text/javascript" src="Script.js"></script>
     <header>
-      <h1>ToDo-deledokie</h1>
-      <img src="logo.png" alt="The logo of our app" height="80" width="80">
-      
-      <a href="splashscreen.html">Logout</a>
+		<h1>ToDo-deledokie</h1>
+		<img src="logo.png" alt="The logo of our app" height="80" width="80" class="logo">
+		<section class="loginform">
+			<span class="logoutlink">
+				<a href="splashscreen.html">Logout</a>
+			</span>
+		</section>
     </header>
 
     <main>
@@ -42,16 +44,16 @@
 
       <div id="Task">
       </div>
-	  <div id="popup" style="popupOFF"></div>
+	  <div id="popup" class="popupOFF"></div>
 	  
     </main>
 
     <footer>
       <div class="contact">
-        <h5>Contact Us</h5>
-        <p>ToDo-deledokie!</p>
-        <p>Lorentzweg 1</p>
-        <p>Delft, 2628 CJ</p>
+        <span class="bold">Contact Us</span><br>
+        <span>ToDo-deledokie!</span><br>
+        <span>Lorentzweg 1</span>
+        <span>Delft, 2628 CJ</span>
       </div>
 
       
