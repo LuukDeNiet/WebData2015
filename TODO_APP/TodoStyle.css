@@ -57,13 +57,14 @@ h1{
 	height: 30px;
 	width: 220px;
 	font-size: 12pt;
-}
-
-#inputusername,textarea{
 	color: #a0a0a0;
 }
 
 #inputusername:focus{
+	color: black;
+}
+
+#inputpassword:focus{
 	color: black;
 }
 
@@ -75,6 +76,7 @@ h1{
 	height: 30px;
 	width: 180px;
 	font-size: 12pt;
+	color: #a0a0a0;
 }
 
 .loginlink1{
