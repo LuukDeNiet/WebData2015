@@ -6,11 +6,7 @@ function todoTask(taskname,important,reminder,deadline,notes){
 	this.notes = notes; //string
 	this.done = false; // boolean
 	
-	this.setDone = function(){
-		this.done = true;
-		todoTaskList.update();
-	}
-	
+		
 }
 
 function readNewTask(){
