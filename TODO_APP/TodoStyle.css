@@ -112,16 +112,63 @@ li::first-letter{
 	position: absolute;
 	left: 25px;
 	top: 135px;
-	width: 10%;
+	width: 30%;
+	line-height: 175%;
+	font: 20pt;
+}
+
+.Notearea{
+	height: 100px;
+	width: 100%;
+	text-align: top;
 }
 
 #Task{
 	position: absolute;
 	top: 135px;
 	right: 25px;
-	width: 85%;
+	width: 1000px;
 	height: 100px;
 }
+
+.tasktable{
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.taskrow1{
+	background-color: #D0D0D0;
+}
+
+.taskrow2{
+	background-color: white;
+}
+
+.taskrowdone{
+	background-color: #A0F0A0;
+}
+
+.taskrowimportant1{
+	background-color: #9090E0;
+}
+
+.taskrowimportant2{
+	background-color: #E0E0F0;
+}
+
+.taskcell{
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+}
+
+.thincell{
+	width: 100px;
+}
+
+.widecell{
+	width:250px;
+}
+
 
 .popup{
 	z-index:10;

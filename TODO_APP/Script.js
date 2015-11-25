@@ -16,7 +16,7 @@ function readNewTask(){
 	var important = document.getElementsByName("Important")[0].checked;
 	var reminder = document.getElementsByName("Reminder")[0].checked;
 	var deadline = new Date(form.elements[5].value);
-	var notes = form.elements[6].value;
+	var notes = document.getElementById("NoteInput").value;
 	
 	
 
@@ -130,40 +130,65 @@ var todoTaskList = (function(){
 			var tasklist = document.getElementById("Task");
 			var body = document.body,
 			tbl  = document.createElement('table');
-			tbl.style.width  = '100%';
-			tbl.style.border = '1px solid black';
+			tbl.classList.add("tasktable")
 
 			for(var i = 0; i < tasks.length; i++){
+				//new row
 				var tr = tbl.insertRow();
-        
+				if(tasks[i].done == true){
+					tr.classList.add("taskrowdone");
+				}
+				else if(tasks[i].important == true){
+					if( i%2 == 1){
+						tr.classList.add("taskrowimportant2");
+					}
+					else{
+						tr.classList.add("taskrowimportant1");
+					}
+				}else if( i%2 == 1){
+					tr.classList.add("taskrow2");
+				}else{
+					tr.classList.add("taskrow1");
+				}
 
-            
+				//Name with link
                 var td = tr.insertCell();
                 
-                td.style.border = '1px solid black';
+                td.classList.add("taskcell");
                 var node = document.createElement("a");
 				node.href = "javascript:popupFunctie(" + i+ ");";
 				var textnode = document.createTextNode(tasks[i].taskname);
 				td.appendChild(node);
 				node.appendChild(textnode);
-
-
-
-               
-               var td = tr.insertCell();
+				
+				//Important cell
+				var td = tr.insertCell();
                 td.appendChild(document.createTextNode(tasks[i].important));
-                td.style.border = '1px solid black';
+                td.classList.add("taskcell");
+				td.classList.add("thincell");
+				
+				//Reminder cell
                 var td = tr.insertCell();
                 td.appendChild(document.createTextNode(tasks[i].reminder));
-                td.style.border = '1px solid black';
+                td.classList.add("taskcell");
+				td.classList.add("thincell");
+				
+				//Deadline cell
                 var td = tr.insertCell();
                 td.appendChild(document.createTextNode(tasks[i].deadline.toDateString()));
-                td.style.border = '1px solid black';
+                td.classList.add("taskcell");
+				td.classList.add("widecell");
+				
+				/*
                 var td = tr.insertCell();
                 td.appendChild(document.createTextNode(tasks[i].notes));
-                td.style.border = '1px solid black';
+                td.classList.add("tasktablecell")
+				*/
+				
+				//Done cell
                 var td = tr.insertCell();
-                td.style.border = '1px solid black';
+                td.classList.add("taskcell");
+				td.classList.add("thincell");
                 var node = document.createElement("a");
 				node.href = "javascript:todoTaskList.toggleDone(" + i+ ");";
 				var textnode = document.createTextNode(tasks[i].done);
@@ -174,27 +199,48 @@ var todoTaskList = (function(){
 
 			var header = tbl.createTHead();
 			var row = header.insertRow(0);
+			
+			//Taskname header
 			var cell = row.insertCell(0);
 			cell.innerHTML = "<b>Taskname</b>";
-
+			cell.classList.add("taskcell");
+			
+			//Importance header
 			var cell = row.insertCell(1);
 			var node = document.createElement("a");
 			node.href = "javascript:todoTaskList.sortImportance();";
 			var textnode = document.createTextNode("Important");
 			cell.appendChild(node);
 			node.appendChild(textnode);
+			cell.classList.add("taskcell");
+			cell.classList.add("thincell");
+			
+			//Reminder header
 			var cell = row.insertCell(2);
 			cell.innerHTML = "<b>Reminder</b>";
+			cell.classList.add("taskcell");
+			cell.classList.add("thincell");
+			
+			//Deadline header
 			var cell = row.insertCell(3);
 			var node = document.createElement("a");
 			node.href = "javascript:todoTaskList.sortDate();";
 			var textnode = document.createTextNode("Deadline");
 			cell.appendChild(node);
 			node.appendChild(textnode);
+			cell.classList.add("taskcell");
+			cell.classList.add("widecell");
+			
+			/*
 			var cell = row.insertCell(4);
 			cell.innerHTML = "<b>Notes</b>";
-			var cell = row.insertCell(5);
+			*/
+			
+			//Done header
+			var cell = row.insertCell(4);
 			cell.innerHTML = "<b>Done</b>";
+			cell.classList.add("taskcell");
+			cell.classList.add("thincell");
 
 			tasklist.appendChild(tbl);
 			}
@@ -218,7 +264,8 @@ function popupFunctie(i){
 	
 	var popup = document.getElementById("popup");
 	popup.classList.add("popup");
-	popup.innerHTML =  '<form id="editfrm">Task<input type="text" name="Task" value="'+ task.taskname +'"><br>Important <input type="radio" name="Importantedit">Yes<input type="radio" name="Importantedit">No<br>Remind me <input type="radio" name="Reminderedit" value="Yes">Yes<input type="radio" name="Reminderedit" value="No">No<br>Deadline<br><input type="text" name="Deadline" value="' + task.deadline +'"><br>Notes<br><input type="text" name="Notes" value="' + task.notes + '"><br></form> <button type="button" onclick="editTask(' + i + ');emptyPopup()">Save changes</button><button type="button" onclick="todoTaskList.deleteTask(' + i + ');emptyPopup();">Delete task</button><button type="button" onclick="emptyPopup();">Discard changes</button>';
+	popup.innerHTML =  '<form id="editfrm">Task<input type="text" name="Task" value="'+ task.taskname +'"><br>Important <input type="radio" name="Importantedit">Yes<input type="radio" name="Importantedit">No<br>Remind me <input type="radio" name="Reminderedit" value="Yes">Yes<input type="radio" name="Reminderedit" value="No">No<br>Deadline<br><input type="text" name="Deadline" value="' + task.deadline +'"><br>Notes<br><textarea name="Noteedit" id="NoteEdit" class="Notearea"></textarea><br></form> <button type="button" onclick="editTask(' + i + ');emptyPopup()">Save changes</button><button type="button" onclick="todoTaskList.deleteTask(' + i + ');emptyPopup();">Delete task</button><button type="button" onclick="emptyPopup();">Discard changes</button>';
+	document.getElementById("NoteEdit").value = task.notes;
 	if(task.important){
 		document.getElementsByName("Importantedit")[0].checked = true;
 	}
@@ -247,7 +294,7 @@ function editTask(i){
 	var important = document.getElementsByName("Importantedit")[0].checked;
 	var reminder = document.getElementsByName("Reminderedit")[0].checked;
 	var deadline = new Date(form.elements[5].value);
-	var notes = form.elements[6].value;
+	var notes = document.getElementById("NoteEdit").value;
 	
 	var task = new todoTask(taskname,important,reminder,deadline,notes);
 	
