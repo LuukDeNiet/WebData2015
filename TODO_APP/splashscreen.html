@@ -2,22 +2,24 @@
 <html>
   <head>
     <title>ToDo-deledokie</title>
+	<link rel="stylesheet" type="text/css" href="TodoStyle.css">
   </head>
 
   <body>
     <header>
-      <h1>ToDo-deledokie</h1>
-	  <img src="logo.png" alt="The logo of our app" height="80" width="80">
+      <h1 class="headline">ToDo-deledokie</h1>
+	  <img src="logo.png" alt="The logo of our app" height="100" width="100" class="logo">
       <section class="loginform">
-        <form>
-          Username<br>
-          <input type="text" name="username">
-          <br>
-          Password:<br>
-          <input type="password" name="Password">
+		<span class="loginlink1"><a href="homepage.html">login</a></span>
+        <form class="loginform">
+			<div class="username">
+				<input type="text" name="username" id="inputusername" value="email@email.com">	
+			</div>
+			<div class = "password">
+				<input type="password" name="Password" id="inputpassword">
+			</div>
         </form>
-        <a href="homepage.html">Log In</a> |
-        <a href="#">Register</a>
+        <span class="loginlink1">or <a href="#">register</a></span>
       </section>
     </header>
 
@@ -32,15 +34,15 @@
         <li>And many more reasons</li>
       </ul>
 
-      <img src="logo.png" alt="The logo of our app">
+      <img src="logo.png" alt="The logo of our app" class="splashscreenlogo">
     </main>
     
     <footer>
       <div class="contact">
-        <h5>Contact Us</h5>
-        <p>ToDo-deledokie!</p>
-        <p>Lorentzweg 1</p>
-        <p>Delft, 2628 CJ</p>
+        <span class="bold">Contact Us</span><br>
+        <span>ToDo-deledokie!</span><br>
+        <span>Lorentzweg 1</span>
+        <span>Delft, 2628 CJ</span>
       </div>
 
       

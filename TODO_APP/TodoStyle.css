@@ -1,0 +1,110 @@
+body{
+	padding: 0px;
+	margin: 0px;
+	overflow-x:hidden;
+	font-family: Tahoma, Geneva, sans-serif;
+}
+
+header{
+
+	display: block;
+	width: 100%;
+	height: 110px;
+	padding: 2px;
+	padding-left: 10px;
+	border-bottom: 1px solid black;
+	margin: 0px;
+	background: #efefef;
+}
+
+section.loginform{
+	position: absolute;
+	right: 10px;
+	top: 5px;
+	display: block;
+	width: 500px;
+	height: 100px;
+	z-index: 1;
+}
+
+h1{
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 32pt;
+}
+
+.logo{
+	position: absolute;
+	left: 425px;
+	top: 5px;
+}
+
+.username{
+	display: inline-block;
+	margin: 2px;
+	margin-right: 30px;
+}
+
+#inputusername,#inputpassword{
+	height: 30px;
+	width: 220px;
+	font-size: 12pt;
+	font-color: light grey;
+}
+
+#inputusername,#inputpassword:active{
+	
+}
+
+.password{
+	display: inline-block;
+}
+
+#inputpassword{
+	width: 180px;
+}
+
+.loginlink1{
+	font-size: 18pt;
+}
+
+.loginlink2{
+	font-size: 18pt;
+}
+
+main{
+	width: 100%;
+	padding: 50px;
+	display: inline-block;
+}
+
+.splashscreenlogo{
+	position: absolute;
+	right: 50px;
+	top: 150px;
+}
+
+footer{
+	position: absolute;
+	display: inline-block;
+	bottom: 0px;
+	width: 100%;
+	height: 100px;
+	padding: 2px;
+	border-top: 1px solid black;
+	margin: 0px;
+	background: #efefef;
+}
+
+.contact{
+	position: absolute;
+	right: 50px;
+	display: block;
+	width: 200px;
+	height: 100px;
+	z-index: 1;
+	line-height: 200%;
+}
+
+.bold{
+	font-weight: bold;
+}

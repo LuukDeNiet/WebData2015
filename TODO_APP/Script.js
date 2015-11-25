@@ -218,7 +218,7 @@ function popupFunctie(i){
 	
 	var popup = document.getElementById("popup");
 	popup.style = "popupON";
-	popup.innerHTML =  '<form id="editfrm">Task<input type="text" name="Task" value="'+ task.taskname +'"><br>Important <input type="radio" name="Importantedit">Yes<input type="radio" name="Importantedit">No<br>Remind me <input type="radio" name="Reminderedit" value="Yes">Yes<input type="radio" name="Reminderedit" value="No">No<br>Deadline<br><input type="date" name="Deadline" value="' + task.deadline +'"><br>Notes<br><input type="text" name="Notes" value="' + task.notes + '"><br></form> <button type="button" onclick="editTask(' + i + ');emptyPopup()">Save changes</button><button type="button" onclick="todoTaskList.deleteTask(' + i + ');emptyPopup();">Delete task</button><button type="button" onclick="emptyPopup();">Discard changes</button>';
+	popup.innerHTML =  '<form id="editfrm">Task<input type="text" name="Task" value="'+ task.taskname +'"><br>Important <input type="radio" name="Importantedit">Yes<input type="radio" name="Importantedit">No<br>Remind me <input type="radio" name="Reminderedit" value="Yes">Yes<input type="radio" name="Reminderedit" value="No">No<br>Deadline<br><input type="text" name="Deadline" value="' + task.deadline +'"><br>Notes<br><input type="text" name="Notes" value="' + task.notes + '"><br></form> <button type="button" onclick="editTask(' + i + ');emptyPopup()">Save changes</button><button type="button" onclick="todoTaskList.deleteTask(' + i + ');emptyPopup();">Delete task</button><button type="button" onclick="emptyPopup();">Discard changes</button>';
 	if(task.important){
 		document.getElementsByName("Importantedit")[0].checked = true;
 	}
@@ -246,7 +246,7 @@ function editTask(i){
 	var taskname = form.elements[0].value;
 	var important = document.getElementsByName("Importantedit")[0].checked;
 	var reminder = document.getElementsByName("Reminderedit")[0].checked;
-	var deadline = form.elements[5].value;
+	var deadline = new Date(form.elements[5].value);
 	var notes = form.elements[6].value;
 	
 	var task = new todoTask(taskname,important,reminder,deadline,notes);
