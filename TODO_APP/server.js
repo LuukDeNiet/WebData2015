@@ -9,10 +9,6 @@ var app = express();
 app.use(express.static(__dirname + "/Client"));
 http.createServer(app).listen(port);
 
-var todos = [];
-var task1 = new todoTask("Call grandma",true,false,"2015-12-02","");
-todos.push(task1);
-
 //clients requests todos
 app.get("/todos", function (req, res) {
 	console.log("todos requested!");
@@ -31,11 +27,18 @@ app.get("/deletetodo", deleteTask);
 
 app.get("/updatetodo", updateTask);
 
+app.get("/toggleDone", toggleDone);
+
+
+var todos = [];
+var task1 = new todoTask("Call grandma",true,false,"02/12/2015","");
+todos.push(task1);
+
 function todoTask(taskname,important,reminder,deadline,notes){
 	this.taskname = taskname;//string
 	this.important = important; // boolean
 	this.reminder = reminder; // boolean
-	this.deadline = deadline; 
+	this.deadline = new Date(deadline); 
 	this.notes = notes; //string
 	this.done = false; // boolean
 	
@@ -71,6 +74,23 @@ function deleteTask(req, res) {
 	}
 	else{
 		res.end("Error: missing number of todo");
+	}
+
+
+};
+
+function toggleDone(req, res) {
+	var url_parts = url.parse(req.url, true);
+	var query = url_parts.query;
+	var index;
+	if(query["number"]!==undefined){
+		index = query["number"];
+		todos[index].done = !todos[index].done;
+		
+		console.log("Toggled done of a todo");
+	}
+	else{
+		console.log("Error: missing number of todo while toggling done");
 	}
 
 

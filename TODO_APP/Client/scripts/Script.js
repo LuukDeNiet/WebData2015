@@ -2,7 +2,7 @@ function todoTask(taskname,important,reminder,deadline,notes){
 	this.taskname = taskname;//string
 	this.important = important; // boolean
 	this.reminder = reminder; // boolean
-	this.deadline = deadline; 
+	this.deadline = new Date(deadline); 
 	this.notes = notes; //string
 	this.done = false; // boolean
 	
@@ -15,21 +15,22 @@ function readNewTask(){
 	var taskname = form.elements[0].value;
 	var important = document.getElementsByName("Important")[0].checked;
 	var reminder = document.getElementsByName("Reminder")[0].checked;
-	var deadline = new Date(form.elements[5].value);
+	var deadline = form.elements[5].value;
 	var notes = document.getElementById("NoteInput").value;
 	
-	
+	jQuery.ajax("../../addtodo?taskname="+taskname+"&important="+important+"&reminder="+reminder+"&deadline="+deadline+"&notes="+notes);
 
-	var task = new todoTask(taskname,important,reminder,deadline,notes);
-	todoTaskList.addTask(task);
-	todoTaskList.update();
 	form.reset();
+	todoTaskList.update();
+	
 }
 
 
 var todoTaskList = (function(){
 	
 	var tasks = [];
+
+
 	
 	return{
 		addTask: function(task){
@@ -41,9 +42,11 @@ var todoTaskList = (function(){
 		},
 		
 		update: function(){
+			
+		jQuery.getJSON("/todos",function(data){tasks=data}).done(function(){todoTaskList.clearScreen();todoTaskList.writeTable();});
 
-			todoTaskList.clearScreen();
-			todoTaskList.writeTable();								
+			
+											
 		},
 
 		deleteTask: function(i){
@@ -121,7 +124,7 @@ var todoTaskList = (function(){
 		},
 
 		toggleDone: function(i){
-			tasks[i].done = !tasks[i].done;
+			jQuery.ajax("../../toggleDone?number="+i);
 			todoTaskList.update();
 
 		},
@@ -175,11 +178,11 @@ var todoTaskList = (function(){
 				
 				//Deadline cell
                 var td = tr.insertCell();
-                td.appendChild(document.createTextNode(tasks[i].deadline.toDateString()));
+                td.appendChild(document.createTextNode(tasks[i].deadline));
                 td.classList.add("taskcell");
 				td.classList.add("widecell");
 				
-				/*
+				/*doTaskList
                 var td = tr.insertCell();
                 td.appendChild(document.createTextNode(tasks[i].notes));
                 td.classList.add("tasktablecell")
@@ -334,7 +337,4 @@ function clone(obj) {
     throw new Error("Unable to copy obj! Its type isn't supported.");
 }
 
-setInterval(function () {
-	console.log("Fetching the todo list from the server.");
-	$.getJSON("todos", console.log("Get Todo"));
-}, 2000);
+
