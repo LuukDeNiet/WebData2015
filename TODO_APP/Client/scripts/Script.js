@@ -141,6 +141,14 @@ var todoTaskList = (function(){
 				if(tasks[i].done == true){
 					tr.classList.add("taskrowdone");
 				}
+				else if(tasks[i].deadline.getTime() < Date.now()){
+					if( i%2 == 1){
+						tr.classList.add("taskrowovertime2");
+					}
+					else{
+						tr.classList.add("taskrowovertime1");
+					}
+				}
 				else if(tasks[i].important == true){
 					if( i%2 == 1){
 						tr.classList.add("taskrowimportant2");
