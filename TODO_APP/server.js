@@ -29,6 +29,8 @@ app.get("/updatetodo", updateTask);
 
 app.get("/toggleDone", toggleDone);
 
+app.get("/sortImportance", sortImportance);
+
 
 var todos = [];
 var task1 = new todoTask("Call grandma",true,false,"02/12/2015","");
@@ -38,7 +40,7 @@ function todoTask(taskname,important,reminder,deadline,notes){
 	this.taskname = taskname;//string
 	this.important = important; // boolean
 	this.reminder = reminder; // boolean
-	this.deadline = new Date(deadline); 
+	this.deadline = deadline; 
 	this.notes = notes; //string
 	this.done = false; // boolean
 	
@@ -53,7 +55,7 @@ function addTask(req, res) {
 	var query = url_parts.query;
 	
 	if(query["taskname"]!==undefined) {
-		var tx = new todoTask(query["taskname"],query["important"] === "true",query["reminder"] === "true",new Date(query["deadline"]),query["notes"]);
+		var tx = new todoTask(query["taskname"],query["important"] === "true",query["reminder"] === "true",query["deadline"],query["notes"]);
 		todos.push(tx);
 		console.log("Added " + tx.taskname);
 		res.end("Todo added successfully");
@@ -100,5 +102,21 @@ function updateTask(res, req){
 	console.log("updating a todo");
 	deleteTask(res, req);
 	addTask(res, req);
+};
+
+function sortImportance(res, req){
+	console.log("sorting by importance")
+	var high = [];
+	var normal = [];
+	for(var i = 0; i < todos.length; i++){
+		if(todos[i].important == true){
+			high.push(todos[i]);
+		} else{
+			normal.push(todos[i]);
+		}
+	}
+
+	todos = [];
+	todos = high.concat(normal);
 };
 

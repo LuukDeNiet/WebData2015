@@ -2,7 +2,7 @@ function todoTask(taskname,important,reminder,deadline,notes){
 	this.taskname = taskname;//string
 	this.important = important; // boolean
 	this.reminder = reminder; // boolean
-	this.deadline = new Date(deadline); 
+	this.deadline = deadline; 
 	this.notes = notes; //string
 	this.done = false; // boolean
 	
@@ -50,8 +50,9 @@ var todoTaskList = (function(){
 		},
 
 		deleteTask: function(i){
-			tasks.splice(i,1);
-			todoTaskList.update();
+			
+			jQuery.ajax("../../deletetodo?number="+i).done(function(){todoTaskList.update();});
+			
 		},
 
 		returnTask: function(i){
@@ -83,21 +84,8 @@ var todoTaskList = (function(){
 		},
 
 		sortImportance: function(){
-			var high = [];
-			var normal = [];
-
-			for(var i = 0; i < tasks.length; i++){
-				if(tasks[i].important == true){
-					high.push(tasks[i]);
-				} else{
-					normal.push(tasks[i]);
-				}
-			}
-
-			tasks = [];
-			tasks = high.concat(normal);
-
-			todoTaskList.update();
+			jQuery.ajax("../../sortImportance").done(function(){todoTaskList.update();});
+			
 
 
 		},
@@ -141,14 +129,14 @@ var todoTaskList = (function(){
 				if(tasks[i].done == true){
 					tr.classList.add("taskrowdone");
 				}
-				else if(tasks[i].deadline.getTime() < Date.now()){
-					if( i%2 == 1){
-						tr.classList.add("taskrowovertime2");
-					}
-					else{
-						tr.classList.add("taskrowovertime1");
-					}
-				}
+//				else if(tasks[i].deadline.getTime() < Date.now()){
+//					if( i%2 == 1){
+//						tr.classList.add("taskrowovertime2");
+//					}
+//					else{
+//						tr.classList.add("taskrowovertime1");
+//					}
+//				}
 				else if(tasks[i].important == true){
 					if( i%2 == 1){
 						tr.classList.add("taskrowimportant2");
@@ -307,9 +295,7 @@ function editTask(i){
 	var deadline = new Date(form.elements[5].value);
 	var notes = document.getElementById("NoteEdit").value;
 	
-	var task = new todoTask(taskname,important,reminder,deadline,notes);
-	
-	todoTaskList.editTask(task,i);
+	jQuery.ajax("../../updatetodo?number="+i+"taskname="+taskname+"&important="+important+"&reminder="+reminder+"&deadline="+deadline+"&notes="+notes);
 	todoTaskList.update();
 }
 
