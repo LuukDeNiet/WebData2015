@@ -58,14 +58,13 @@ h1{
 	height: 30px;
 	width: 220px;
 	font-size: 12pt;
+}
+
+.preinput{
 	color: #a0a0a0;
 }
 
-#inputusername:focus{
-	color: black;
-}
-
-#inputpassword:focus{
+.preinput:focus{
 	color: black;
 }
 
