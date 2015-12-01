@@ -268,7 +268,7 @@ function editTask(i){
 	var deadline = form.elements[5].value;
 	var notes = document.getElementById("NoteEdit").value;
 	
-	jQuery.ajax("../../updatetodo?number="+i+"taskname="+taskname+"&important="+important+"&reminder="+reminder+"&deadline="+deadline+"&notes="+notes);
+	jQuery.ajax("../../updatetodo?number="+i+"&taskname="+taskname+"&important="+important+"&reminder="+reminder+"&deadline="+deadline+"&notes="+notes);
 	todoTaskList.update();
 }
 
