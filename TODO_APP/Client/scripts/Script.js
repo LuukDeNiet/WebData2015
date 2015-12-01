@@ -37,16 +37,10 @@ var todoTaskList = (function(){
 			tasks.push(task);
 		},
 		
-		editTask: function(task,i){
-			tasks[i] = task;
-		},
-		
 		update: function(){
 			
 		jQuery.getJSON("/todos",function(data){tasks=data}).done(function(){todoTaskList.clearScreen();todoTaskList.writeTable();});
-
-			
-											
+						
 		},
 
 		deleteTask: function(i){
@@ -86,8 +80,6 @@ var todoTaskList = (function(){
 		sortImportance: function(){
 			jQuery.ajax("../../sortImportance").done(function(){todoTaskList.update();});
 			
-
-
 		},
 
 		sortDate: function(){
@@ -129,14 +121,6 @@ var todoTaskList = (function(){
 				if(tasks[i].done == true){
 					tr.classList.add("taskrowdone");
 				}
-//				else if(tasks[i].deadline.getTime() < Date.now()){
-//					if( i%2 == 1){
-//						tr.classList.add("taskrowovertime2");
-//					}
-//					else{
-//						tr.classList.add("taskrowovertime1");
-//					}
-//				}
 				else if(tasks[i].important == true){
 					if( i%2 == 1){
 						tr.classList.add("taskrowimportant2");
@@ -177,12 +161,6 @@ var todoTaskList = (function(){
                 td.appendChild(document.createTextNode(tasks[i].deadline));
                 td.classList.add("taskcell");
 				td.classList.add("widecell");
-				
-				/*doTaskList
-                var td = tr.insertCell();
-                td.appendChild(document.createTextNode(tasks[i].notes));
-                td.classList.add("tasktablecell")
-				*/
 				
 				//Done cell
                 var td = tr.insertCell();
@@ -229,11 +207,6 @@ var todoTaskList = (function(){
 			node.appendChild(textnode);
 			cell.classList.add("taskcell");
 			cell.classList.add("widecell");
-			
-			/*
-			var cell = row.insertCell(4);
-			cell.innerHTML = "<b>Notes</b>";
-			*/
 			
 			//Done header
 			var cell = row.insertCell(4);
@@ -292,7 +265,7 @@ function editTask(i){
 	var taskname = form.elements[0].value;
 	var important = document.getElementsByName("Importantedit")[0].checked;
 	var reminder = document.getElementsByName("Reminderedit")[0].checked;
-	var deadline = new Date(form.elements[5].value);
+	var deadline = form.elements[5].value;
 	var notes = document.getElementById("NoteEdit").value;
 	
 	jQuery.ajax("../../updatetodo?number="+i+"taskname="+taskname+"&important="+important+"&reminder="+reminder+"&deadline="+deadline+"&notes="+notes);
