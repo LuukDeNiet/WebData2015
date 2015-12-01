@@ -100,8 +100,8 @@ function toggleDone(req, res) {
 
 function updateTask(res, req){
 	console.log("updating a todo");
-	deleteTask(res, req);
 	addTask(res, req);
+	deleteTask(res, req);
 };
 
 function sortImportance(res, req){
