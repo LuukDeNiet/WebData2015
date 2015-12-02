@@ -104,8 +104,7 @@ var todoTaskList = (function(){
 		},
 
 		sortDate: function(){
-			jQuery.ajax("../../sortDate").done(function(){todoTaskList.update();});
-				/*
+			jQuery.ajax("../../sortDate").done(function(){
 				var sorted = [];
 				var totaal = tasks.length;
 				var index;
@@ -124,7 +123,6 @@ var todoTaskList = (function(){
 				todoTaskList.clearScreen();
 				todoTaskList.writeTable();
 			});
-			*/
         },
 
 
