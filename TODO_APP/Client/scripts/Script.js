@@ -18,7 +18,7 @@ function readNewTask(){
 	var deadline = form.elements[5].value;
 	var notes = document.getElementById("NoteInput").value;
 	
-	if (var correctly = correctform() ){
+	if (correctform()){
 		jQuery.ajax("../../addtodo?taskname="+taskname+"&important="+important+"&reminder="+reminder+"&deadline="+deadline+"&notes="+notes);
 	
 		form.reset();
