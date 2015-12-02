@@ -81,6 +81,7 @@ var todoTaskList = (function(){
 		},
 
 		sortDate: function(){
+			jQuery.ajax("../../sortDate");
             var sorted = [];
             var totaal = tasks.length;
             var index;
