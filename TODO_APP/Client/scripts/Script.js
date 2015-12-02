@@ -127,30 +127,6 @@ var todoTaskList = (function(){
 			*/
         },
 
-
-		/*
-		sortDate: function(){
-			var sorted = [];
-			var totaal = tasks.length;
-			var index;
-
-			for (var i = 0; i<totaal; i++){
-				index = 0;
-				for(var j = 0;j<tasks.length;j++){
-					if(tasks[index].deadline>tasks[j].deadline){
-						index = clone(j);
-					}
-				}
-				sorted.push(tasks[index]);
-				tasks.splice(index,1);
-			}
-			tasks = clone(sorted);
-			
-			todoTaskList.update();
-
-		},
-*/
-
 		toggleDone: function(i){
 			jQuery.ajax("../../toggleDone?number="+i);
 			todoTaskList.update();
