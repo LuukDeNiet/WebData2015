@@ -165,12 +165,11 @@ var todoTaskList = (function(){
                 var td = tr.insertCell();
                 td.classList.add("taskcell");
 				td.classList.add("thincell");
-				var node;
+				var node = document.createElement(input);
+				node.type = "checkbox";
 				if(tasks[i].done){
-					node = document.createElement("<input type='checkbox' checked='checked'>");
-				}
-				else{
-					node = document.createElement("<input type='checkbox'>");
+					node.checked = "checked";
+	
 				}
 				node.onclick = "javascript:todoTaskList.toggleDone(" + i+ ");";
 				td.appendChild(node);
