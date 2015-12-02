@@ -171,7 +171,7 @@ var todoTaskList = (function(){
 					node.checked = "checked";
 	
 				}
-				node.onclick = "javascript:todoTaskList.toggleDone(" + i+ ");";
+				node.addEventListener("click",function(){todoTaskList.toggleDone(i)});
 				td.appendChild(node);
 				}
 
