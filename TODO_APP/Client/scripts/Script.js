@@ -74,6 +74,14 @@ var todoTaskList = (function(){
 			return tasks[i];
 		},
 
+		returnAll: function(){
+			return tasks;
+		},
+
+		writeAll: function(data){
+			tasks = data;
+		},
+
 		clearScreen: function(){
 
 			var tasklist = document.getElementById("Task");
@@ -81,21 +89,6 @@ var todoTaskList = (function(){
 			while(tasklist.firstChild){
 				tasklist.removeChild(tasklist.firstChild);
 			}          
-		},
-
-		writeAll: function(){
-
-			var tasklist = document.getElementById("Task");
-			
-			for(var i = 0; i < tasks.length; i++){
-				var p = document.createElement("p");
-				var node = document.createElement("a");
-				node.href = "javascript:popupFunctie(" + i+ ");";
-				var textnode = document.createTextNode(tasks[i].taskname);
-				p.appendChild(node);
-				node.appendChild(textnode);
-				tasklist.appendChild(p);
-			}
 		},
 
 		sortImportance: function(){
@@ -349,5 +342,14 @@ function clone(obj) {
 
     throw new Error("Unable to copy obj! Its type isn't supported.");
 }
+
+setInterval(function () {
+ console.log("Fetching the todo list from the server.");
+ $.getJSON("/todos", function(data){
+ 	if(data !== todoTaskList.returnAll()){
+ 		todoTaskList.writeAll(data);
+ 	}
+ });
+ }, 2000);
 
 
