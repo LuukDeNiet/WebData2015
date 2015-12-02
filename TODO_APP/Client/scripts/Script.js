@@ -172,11 +172,15 @@ var todoTaskList = (function(){
 					node.checked = "checked";
 	
 				}
+				
 				function createfunc(i){
-					return function(){todoTaskList.toggleDone(i);
+					return function(){todoTaskList.toggleDone(i)};
 				}
+				
 				clickfuncs[i] = createfunc(i);
+				
 				node.addEventListener("click",clickfuncs[i]);
+				
 				td.appendChild(node);
 				}
 
