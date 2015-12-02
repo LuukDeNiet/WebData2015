@@ -165,7 +165,7 @@ var todoTaskList = (function(){
                 var td = tr.insertCell();
                 td.classList.add("taskcell");
 				td.classList.add("thincell");
-				var node = document.createElement(input);
+				var node = document.createElement("input");
 				node.type = "checkbox";
 				if(tasks[i].done){
 					node.checked = "checked";
