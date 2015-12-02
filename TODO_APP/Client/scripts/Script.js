@@ -286,7 +286,7 @@ function editTask(i){
 	var notes = document.getElementById("NoteEdit").value;
 	
 	jQuery.ajax("../../updatetodo?number="+i+"&taskname="+taskname+"&important="+important+"&reminder="+reminder+"&deadline="+deadline+"&notes="+notes);
-	todoTaskList.update();
+	
 }
 
 function clone(obj) {
