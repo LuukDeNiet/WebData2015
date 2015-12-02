@@ -24,7 +24,7 @@ function readNewTask(){
 		form.reset();
 		todoTaskList.update();
 	}else{
-		alert("Form not filled in correctly")
+		alert("Form not filled in correctly");
 	}
 	
 }
@@ -42,7 +42,7 @@ function correctform(){
 	var notes = document.getElementById("NoteInput").value;
 
 	var checkboxes = (important || notimportant) && (reminder || notreminder);
-	var strings = (taskname !=== "");
+	var strings = (taskname !== "");
 	correct = checkboxes && strings;
 
 	return correct;
@@ -104,7 +104,8 @@ var todoTaskList = (function(){
 		},
 
 		sortDate: function(){
-			jQuery.ajax("../../sortDate").done(function(){
+			jQuery.ajax("../../sortDate").done(function(){todoTaskList.update();});
+				/*
 				var sorted = [];
 				var totaal = tasks.length;
 				var index;
@@ -123,6 +124,7 @@ var todoTaskList = (function(){
 				todoTaskList.clearScreen();
 				todoTaskList.writeTable();
 			});
+			*/
         },
 
 
