@@ -51,6 +51,7 @@ function correctform(){
 	return correct;
 }
 
+var clickfuncs =[];
 
 var todoTaskList = (function(){
 	
@@ -171,7 +172,11 @@ var todoTaskList = (function(){
 					node.checked = "checked";
 	
 				}
-				node.addEventListener("click",function(){todoTaskList.toggleDone(clone(i))});
+				function createfunc(i){
+					return function(){todoTaskList.toggleDone(i);
+				}
+				clickfuncs[i] = createfunc(i);
+				node.addEventListener("click",clickfuncs[i]);
 				td.appendChild(node);
 				}
 
