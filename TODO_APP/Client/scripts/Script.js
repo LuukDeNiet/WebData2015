@@ -44,8 +44,10 @@ function correctform(){
 
 	var strings = (taskname !== "");
 
-	var regexdeadline = new RegExp("\d{4}[-][0-1]\d[-][0-3]\d");
-	var deadlinetest = regexdeadline.test(deadline);
+	console.log(deadline);
+	var regex = /\d{4}[-][0-1]\d[-][0-3]\d/;
+	var deadlinetest = regex.test(deadline);
+	console.log(deadlinetest);
 	correct = checkboxes && strings && deadlinetest;
 
 	return correct;
