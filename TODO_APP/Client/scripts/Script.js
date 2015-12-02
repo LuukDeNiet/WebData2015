@@ -326,9 +326,7 @@ setInterval(function () {
  console.log("Fetching the todo list from the server.");
  $.getJSON("/todos", function(data){
  	if(data !== todoTaskList.returnAll()){
- 		todoTaskList.writeAll(data);
-		todoTaskList.clearScreen();
-		todoTaskList.writeTable();
+ 		todoTaskList.update();
  	}
  });
  }, 2000);
