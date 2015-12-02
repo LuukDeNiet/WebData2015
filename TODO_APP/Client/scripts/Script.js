@@ -5,8 +5,6 @@ function todoTask(taskname,important,reminder,deadline,notes){
 	this.deadline = deadline; 
 	this.notes = notes; //string
 	this.done = false; // boolean
-	
-		
 }
 
 function readNewTask(){
@@ -18,11 +16,8 @@ function readNewTask(){
 	var deadline = form.elements[5].value;
 	var notes = document.getElementById("NoteInput").value;
 	
-<<<<<<< HEAD
+
 	if (correctform() ){
-=======
-	if (correctform()){
->>>>>>> Geert's_copy
 		jQuery.ajax("../../addtodo?taskname="+taskname+"&important="+important+"&reminder="+reminder+"&deadline="+deadline+"&notes="+notes);
 	
 		form.reset();
@@ -46,11 +41,9 @@ function correctform(){
 	var notes = document.getElementById("NoteInput").value;
 
 	var checkboxes = (important || notimportant) && (reminder || notreminder);
-<<<<<<< HEAD
-	var strings = taskname !== "";
-=======
+
 	var strings = (taskname !== "");
->>>>>>> Geert's_copy
+
 	correct = checkboxes && strings;
 
 	return correct;
