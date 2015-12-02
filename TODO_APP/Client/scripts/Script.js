@@ -93,12 +93,12 @@ var todoTaskList = (function(){
 		},
 
 		sortImportance: function(){
-			jQuery.ajax("../../sortImportance").done(function(){todoTaskList.update();});
+			jQuery.ajax("../../sortImportance").always(function(){todoTaskList.update();});
 			
 		},
 
 		sortDate: function(){
-			jQuery.ajax("../../sortDate").done(function(){todoTaskList.update();});
+			jQuery.ajax("../../sortDate").always(function(){todoTaskList.update();});
 				/*
 				var sorted = [];
 				var totaal = tasks.length;
