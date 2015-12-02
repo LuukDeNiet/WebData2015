@@ -19,6 +19,7 @@ app.get("/todos", function (req, res) {
 app.get("/", function (req,res) {
 	res.sendFile("/Client/splashscreen.html", {root: __dirname})
 });
+
 //add todo to the server
 app.get("/addtodo", addTask);
 
@@ -31,9 +32,11 @@ app.get("/toggleDone", toggleDone);
 
 app.get("/sortImportance", sortImportance);
 
+app.get("/sortDate",sortDate);
+
 
 var todos = [];
-var task1 = new todoTask("Call grandma",true,false,"02/12/2015","");
+var task1 = new todoTask("Call grandma",true,false,"2015-12-02","");
 todos.push(task1);
 
 function todoTask(taskname,important,reminder,deadline,notes){
@@ -95,7 +98,6 @@ function toggleDone(req, res) {
 		console.log("Error: missing number of todo while toggling done");
 	}
 
-
 };
 
 function updateTask(res, req){
@@ -105,7 +107,7 @@ function updateTask(res, req){
 };
 
 function sortImportance(res, req){
-	console.log("sorting by importance")
+	console.log("sorting by importance");
 	var high = [];
 	var normal = [];
 	for(var i = 0; i < todos.length; i++){
@@ -115,8 +117,26 @@ function sortImportance(res, req){
 			normal.push(todos[i]);
 		}
 	}
-
 	todos = [];
 	todos = high.concat(normal);
 };
+
+function sortDate(res, req){
+	console.log("sorting by date");
+	var sorted = [];
+    var totaal = todos.length;
+    var index;
+
+    for (var i = 0; i<totaal; i++){
+        index = 0;
+        for(var j = 0;j<tasks.length;j++){
+            if(tasks[index].deadline>tasks[j].deadline){
+                index = clone(j);
+            }
+        }
+        sorted.push(tasks[index]);
+        tasks.splice(index,1);
+    }
+	todos = clone(sorted);
+}
 
