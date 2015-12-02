@@ -18,13 +18,13 @@ function readNewTask(){
 	var deadline = form.elements[5].value;
 	var notes = document.getElementById("NoteInput").value;
 	
-	if (var correctly = correctform() ){
+	if (correctform() ){
 		jQuery.ajax("../../addtodo?taskname="+taskname+"&important="+important+"&reminder="+reminder+"&deadline="+deadline+"&notes="+notes);
 	
 		form.reset();
 		todoTaskList.update();
 	}else{
-		alert("Form not filled in correctly")
+		alert("Form not filled in correctly");
 	}
 	
 }
@@ -42,7 +42,7 @@ function correctform(){
 	var notes = document.getElementById("NoteInput").value;
 
 	var checkboxes = (important || notimportant) && (reminder || notreminder);
-	var strings = (taskname !=== "");
+	var strings = taskname !== "";
 	correct = checkboxes && strings;
 
 	return correct;
