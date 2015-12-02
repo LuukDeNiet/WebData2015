@@ -165,11 +165,15 @@ var todoTaskList = (function(){
                 var td = tr.insertCell();
                 td.classList.add("taskcell");
 				td.classList.add("thincell");
-                var node = document.createElement("a");
-				node.href = "javascript:todoTaskList.toggleDone(" + i+ ");";
-				var textnode = document.createTextNode(tasks[i].done);
+				var node;
+				if(tasks[i].done){
+					node = document.createElement("<input type='checkbox' checked='checked'>");
+				}
+				else{
+					node = document.createElement("<input type='checkbox'>");
+				}
+				node.onclick = "javascript:todoTaskList.toggleDone(" + i+ ");";
 				td.appendChild(node);
-				node.appendChild(textnode);
 				}
 
 
