@@ -18,11 +18,34 @@ function readNewTask(){
 	var deadline = form.elements[5].value;
 	var notes = document.getElementById("NoteInput").value;
 	
-	jQuery.ajax("../../addtodo?taskname="+taskname+"&important="+important+"&reminder="+reminder+"&deadline="+deadline+"&notes="+notes);
-
-	form.reset();
-	todoTaskList.update();
+	if (correctform()){
+		jQuery.ajax("../../addtodo?taskname="+taskname+"&important="+important+"&reminder="+reminder+"&deadline="+deadline+"&notes="+notes);
 	
+		form.reset();
+		todoTaskList.update();
+	}else{
+		alert("Form not filled in correctly")
+	}
+	
+}
+
+function correctform(){
+	var form = document.getElementById("frm1");
+	var correct = true;
+
+	var taskname = form.elements[0].value;
+	var important = document.getElementsByName("Important")[0].checked;
+	var notimportant = document.getElementsByName("Important")[1].checked;
+	var reminder = document.getElementsByName("Reminder")[0].checked;
+	var notreminder = document.getElementsByName("Reminder")[1].checked;
+	var deadline = form.elements[5].value;
+	var notes = document.getElementById("NoteInput").value;
+
+	var checkboxes = (important || notimportant) && (reminder || notreminder);
+	var strings = (taskname !=== "");
+	correct = checkboxes && strings;
+
+	return correct;
 }
 
 
