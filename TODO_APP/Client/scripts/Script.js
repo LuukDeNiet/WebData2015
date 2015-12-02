@@ -44,7 +44,9 @@ function correctform(){
 
 	var strings = (taskname !== "");
 
-	correct = checkboxes && strings;
+	var regexdeadline = new RegExp("\d{4}[-][0-1]\d[-][0-3]\d");
+	var deadlinetest = regexdeadline.test(deadline);
+	correct = checkboxes && strings && deadlinetest;
 
 	return correct;
 }
@@ -99,26 +101,6 @@ var todoTaskList = (function(){
 
 		sortDate: function(){
 			jQuery.ajax("../../sortDate");
-				/*
-				var sorted = [];
-				var totaal = tasks.length;
-				var index;
-
-				for (var i = 0; i<totaal; i++){
-					index = 0;
-					for(var j = 0;j<tasks.length;j++){
-						if(tasks[index].deadline>tasks[j].deadline){
-							index = clone(j);
-						}
-					}
-					sorted.push(tasks[index]);
-					tasks.splice(index,1);
-				}
-				tasks = clone(sorted);
-				todoTaskList.clearScreen();
-				todoTaskList.writeTable();
-			});
-			*/
         },
 
 		toggleDone: function(i){
