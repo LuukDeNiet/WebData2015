@@ -95,7 +95,6 @@ function toggleDone(req, res) {
 		console.log("Error: missing number of todo while toggling done");
 	}
 
-
 };
 
 function updateTask(res, req){
