@@ -129,13 +129,13 @@ function sortDate(res, req){
 
     for (var i = 0; i<totaal; i++){
         index = 0;
-        for(var j = 0;j<tasks.length;j++){
-            if(tasks[index].deadline>tasks[j].deadline){
+        for(var j = 0;j<todos.length;j++){
+            if(todos[index].deadline>todos[j].deadline){
                 index = clone(j);
             }
         }
-        sorted.push(tasks[index]);
-        tasks.splice(index,1);
+        sorted.push(todos[index]);
+        todos.splice(index,1);
     }
 	todos = clone(sorted);
 }
