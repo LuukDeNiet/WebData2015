@@ -129,14 +129,47 @@ function sortDate(res, req){
 
     for (var i = 0; i<totaal; i++){
         index = 0;
-        for(var j = 0;j<tasks.length;j++){
-            if(tasks[index].deadline>tasks[j].deadline){
+        for(var j = 0;j<todos.length;j++){
+            if(todos[index].deadline>todos[j].deadline){
                 index = clone(j);
             }
         }
-        sorted.push(tasks[index]);
-        tasks.splice(index,1);
+        sorted.push(todos[index]);
+        todos.splice(index,1);
     }
 	todos = clone(sorted);
+	console.log("sorting by finished");
+}
+
+function clone(obj) {
+    // Handle the 3 simple types, and null or undefined
+    if (null == obj || "object" != typeof obj) return obj;
+
+    // Handle Date
+    if (obj instanceof Date) {
+        var copy = new Date();
+        copy.setTime(obj.getTime());
+        return copy;
+    }
+
+    // Handle Array
+    if (obj instanceof Array) {
+        var copy = [];
+        for (var i = 0, len = obj.length; i < len; i++) {
+            copy[i] = clone(obj[i]);
+        }
+        return copy;
+    }
+
+    // Handle Object
+    if (obj instanceof Object) {
+        var copy = {};
+        for (var attr in obj) {
+            if (obj.hasOwnProperty(attr)) copy[attr] = clone(obj[attr]);
+        }
+        return copy;
+    }
+
+    throw new Error("Unable to copy obj! Its type isn't supported.");
 }
 

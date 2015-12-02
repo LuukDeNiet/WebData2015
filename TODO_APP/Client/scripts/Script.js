@@ -18,7 +18,11 @@ function readNewTask(){
 	var deadline = form.elements[5].value;
 	var notes = document.getElementById("NoteInput").value;
 	
+<<<<<<< HEAD
 	if (correctform() ){
+=======
+	if (correctform()){
+>>>>>>> Geert's_copy
 		jQuery.ajax("../../addtodo?taskname="+taskname+"&important="+important+"&reminder="+reminder+"&deadline="+deadline+"&notes="+notes);
 	
 		form.reset();
@@ -42,7 +46,11 @@ function correctform(){
 	var notes = document.getElementById("NoteInput").value;
 
 	var checkboxes = (important || notimportant) && (reminder || notreminder);
+<<<<<<< HEAD
 	var strings = taskname !== "";
+=======
+	var strings = (taskname !== "");
+>>>>>>> Geert's_copy
 	correct = checkboxes && strings;
 
 	return correct;
@@ -97,7 +105,8 @@ var todoTaskList = (function(){
 		},
 
 		sortDate: function(){
-			jQuery.ajax("../../sortDate").done(function(){
+			jQuery.ajax("../../sortDate").done(function(){todoTaskList.update();});
+				/*
 				var sorted = [];
 				var totaal = tasks.length;
 				var index;
@@ -116,31 +125,8 @@ var todoTaskList = (function(){
 				todoTaskList.clearScreen();
 				todoTaskList.writeTable();
 			});
+			*/
         },
-
-
-		/*
-		sortDate: function(){
-			var sorted = [];
-			var totaal = tasks.length;
-			var index;
-
-			for (var i = 0; i<totaal; i++){
-				index = 0;
-				for(var j = 0;j<tasks.length;j++){
-					if(tasks[index].deadline>tasks[j].deadline){
-						index = clone(j);
-					}
-				}
-				sorted.push(tasks[index]);
-				tasks.splice(index,1);
-			}
-			tasks = clone(sorted);
-			
-			todoTaskList.update();
-
-		},
-*/
 
 		toggleDone: function(i){
 			jQuery.ajax("../../toggleDone?number="+i);
