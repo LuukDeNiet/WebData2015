@@ -301,7 +301,8 @@ setInterval(function () {
  //console.log("Fetching the todo list from the server.");
  $.getJSON("/todos", function(data){
  	if(data != allTasks()){
- 		console.log("update page")
+ 		console.log(data);
+ 		console.log(allTasks());
  		tasks = data;
  		clearScreen();
  		writeTable();
