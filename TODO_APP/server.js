@@ -61,10 +61,10 @@ function addTask(req, res) {
 		var tx = new todoTask(query["taskname"],query["important"] === "true",query["reminder"] === "true",query["deadline"],query["notes"]);
 		todos.push(tx);
 		console.log("Added " + tx.taskname);
-		res.end("Todo added successfully");
+		//res.end("Todo added successfully");
 	}
 	else {
-		res.end("Error: missing taskname parameter");
+		//res.end("Error: missing taskname parameter");
 	}
 };
 
@@ -74,11 +74,11 @@ function deleteTask(req, res) {
 
 	if(query["number"]!==undefined){
 		todos.splice(query["number"],1);
-		res.end("Todo deleted successfully");
+		//res.end("Todo deleted successfully");
 		console.log("Deleted a todo");
 	}
 	else{
-		res.end("Error: missing number of todo");
+		//res.end("Error: missing number of todo");
 	}
 
 
