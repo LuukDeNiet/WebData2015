@@ -150,7 +150,10 @@ function writeTable(){
 		}
 				
 		function createfunc(i){
-			return function(){toggleDone(i)};
+			return function(){
+				toggleDone(i);
+				console.log("Clicked done checkbox of todo "+i)
+			};
 		}
 				
 		clickfuncs[i] = createfunc(i);
@@ -291,9 +294,10 @@ function clone(obj) {
 }
 
 setInterval(function () {
- console.log("Fetching the todo list from the server.");
+ //console.log("Fetching the todo list from the server.");
  $.getJSON("/todos", function(data){
  	if(data !== tasks){
+ 		console.log("update page")
  		tasks = data;
  		clearScreen();
  		writeTable();
