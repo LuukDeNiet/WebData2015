@@ -1,5 +1,9 @@
 var tasks = [];
 
+function allTasks(){
+	return tasks;
+}
+
 function todoTask(taskname,important,reminder,deadline,notes){
 	this.taskname = taskname;//string
 	this.important = important; // boolean
@@ -296,7 +300,7 @@ function clone(obj) {
 setInterval(function () {
  //console.log("Fetching the todo list from the server.");
  $.getJSON("/todos", function(data){
- 	if(data !== tasks){
+ 	if(data !== allTasks()){
  		console.log("update page")
  		tasks = data;
  		clearScreen();
