@@ -238,7 +238,7 @@ function popupFunctie(i){
 	}
 }
 
-window.onload = update
+window.onload = update()
 
 function emptyPopup(){
 	var popup = document.getElementById("popup");
