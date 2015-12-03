@@ -300,7 +300,7 @@ function clone(obj) {
 setInterval(function () {
  //console.log("Fetching the todo list from the server.");
  $.getJSON("/todos", function(data){
- 	if(data != allTasks()){
+ 	if(Object.toJSON(data) != Object.toJSON(tasks)){
  		console.log(data);
  		console.log(allTasks());
  		console.log(data == allTasks());
