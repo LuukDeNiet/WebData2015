@@ -1,3 +1,5 @@
+var tasks = [];
+
 function todoTask(taskname,important,reminder,deadline,notes){
 	this.taskname = taskname;//string
 	this.important = important; // boolean
@@ -21,7 +23,7 @@ function readNewTask(){
 		jQuery.ajax("../../addtodo?taskname="+taskname+"&important="+important+"&reminder="+reminder+"&deadline="+deadline+"&notes="+notes);
 	
 		form.reset();
-		todoTaskList.update();
+		update();
 	}else{
 		alert("Form not filled in correctly");
 	}
@@ -53,64 +55,38 @@ function correctform(){
 
 var clickfuncs =[];
 
-var todoTaskList = (function(){
-	
-	var tasks = [];
-	
-	return{
-		addTask: function(task){
-			tasks.push(task);
-		},
-		
-		update: function(){
+function Update(){
+
+	jQuery.getJSON("/todos",function(data){tasks=data}).done(function(){clearScreen();writeTable();});
+
+}
+
+function deleteTask(i){
+	jQuery.ajax("../../deletetodo?number="+i).done(function(){update();});
+}
+
+function clearScreen(){
+	var tasklist = document.getElementById("Task");
 			
-		jQuery.getJSON("/todos",function(data){tasks=data}).done(function(){todoTaskList.clearScreen();todoTaskList.writeTable();});
-						
-		},
+	while(tasklist.firstChild){
+		tasklist.removeChild(tasklist.firstChild);
+	}
+}
 
-		deleteTask: function(i){
-			
-			jQuery.ajax("../../deletetodo?number="+i).done(function(){todoTaskList.update();});
-			
-		},
+function sortImportance(){
+	jQuery.ajax("../../sortImportance");
+}
 
-		returnTask: function(i){
-			return tasks[i];
-		},
+function sortDate(){
+	jQuery.ajax("../../sortDate");
+}
 
-		returnAll: function(){
-			return tasks;
-		},
+function toggleDone(i){
+	jQuery.ajax("../../toggleDone?number="+i);
+}
 
-		writeAll: function(data){
-			tasks = data;
-		},
-
-		clearScreen: function(){
-
-			var tasklist = document.getElementById("Task");
-			
-			while(tasklist.firstChild){
-				tasklist.removeChild(tasklist.firstChild);
-			}          
-		},
-
-		sortImportance: function(){
-			jQuery.ajax("../../sortImportance");
-			
-		},
-
-		sortDate: function(){
-			jQuery.ajax("../../sortDate");
-        },
-
-		toggleDone: function(i){
-			jQuery.ajax("../../toggleDone?number="+i);
-
-		},
-
-		writeTable: function(){
-			var tasklist = document.getElementById("Task");
+function writeTable(){
+	var tasklist = document.getElementById("Task");
 			var body = document.body,
 			tbl  = document.createElement('table');
 			tbl.classList.add("tasktable")
@@ -174,7 +150,7 @@ var todoTaskList = (function(){
 				}
 				
 				function createfunc(i){
-					return function(){todoTaskList.toggleDone(i)};
+					return function(){toggleDone(i)};
 				}
 				
 				clickfuncs[i] = createfunc(i);
@@ -196,7 +172,7 @@ var todoTaskList = (function(){
 			//Importance header
 			var cell = row.insertCell(1);
 			var node = document.createElement("a");
-			node.href = "javascript:todoTaskList.sortImportance();";
+			node.href = "javascript:sortImportance();";
 			var textnode = document.createTextNode("Important");
 			cell.appendChild(node);
 			node.appendChild(textnode);
@@ -212,7 +188,7 @@ var todoTaskList = (function(){
 			//Deadline header
 			var cell = row.insertCell(3);
 			var node = document.createElement("a");
-			node.href = "javascript:todoTaskList.sortDate();";
+			node.href = "javascript:sortDate();";
 			var textnode = document.createTextNode("Deadline");
 			cell.appendChild(node);
 			node.appendChild(textnode);
@@ -229,11 +205,10 @@ var todoTaskList = (function(){
 			}
 
 	}
-})();
-
+}
 
 function popupFunctie(i){
-	var task = todoTaskList.returnTask(i);
+	var task = tasks[i];
 	var reminder1;
 	var reminder2;
 	if(task.reminder){
@@ -247,7 +222,7 @@ function popupFunctie(i){
 	
 	var popup = document.getElementById("popup");
 	popup.classList.add("popup");
-	popup.innerHTML =  '<form id="editfrm">Task<input type="text" name="Task" value="'+ task.taskname +'"><br>Important <input type="radio" name="Importantedit">Yes<input type="radio" name="Importantedit">No<br>Remind me <input type="radio" name="Reminderedit" value="Yes">Yes<input type="radio" name="Reminderedit" value="No">No<br>Deadline<br><input type="text" name="Deadline" value="' + task.deadline +'"><br>Notes<br><textarea name="Noteedit" id="NoteEdit" class="Notearea"></textarea><br></form> <button type="button" onclick="editTask(' + i + ');emptyPopup()">Save changes</button><button type="button" onclick="todoTaskList.deleteTask(' + i + ');emptyPopup();">Delete task</button><button type="button" onclick="emptyPopup();">Discard changes</button>';
+	popup.innerHTML =  '<form id="editfrm">Task<input type="text" name="Task" value="'+ task.taskname +'"><br>Important <input type="radio" name="Importantedit">Yes<input type="radio" name="Importantedit">No<br>Remind me <input type="radio" name="Reminderedit" value="Yes">Yes<input type="radio" name="Reminderedit" value="No">No<br>Deadline<br><input type="text" name="Deadline" value="' + task.deadline +'"><br>Notes<br><textarea name="Noteedit" id="NoteEdit" class="Notearea"></textarea><br></form> <button type="button" onclick="editTask(' + i + ');emptyPopup()">Save changes</button><button type="button" onclick="deleteTask(' + i + ');emptyPopup();">Delete task</button><button type="button" onclick="emptyPopup();">Discard changes</button>';
 	document.getElementById("NoteEdit").value = task.notes;
 	if(task.important){
 		document.getElementsByName("Importantedit")[0].checked = true;
@@ -263,7 +238,7 @@ function popupFunctie(i){
 	}
 }
 
-window.onload = todoTaskList.update
+window.onload = update
 
 function emptyPopup(){
 	var popup = document.getElementById("popup");
@@ -318,10 +293,10 @@ function clone(obj) {
 setInterval(function () {
  console.log("Fetching the todo list from the server.");
  $.getJSON("/todos", function(data){
- 	if(data !== todoTaskList.returnAll()){
- 		todoTaskList.writeAll(data);
- 		todoTaskList.clearScreen();
- 		todoTaskList.writeTable();
+ 	if(data !== tasks){
+ 		tasks = data;
+ 		clearScreen();
+ 		writeTable();
  	}
  });
  }, 2000);
