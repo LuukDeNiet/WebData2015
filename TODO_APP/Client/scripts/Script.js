@@ -55,7 +55,7 @@ function correctform(){
 
 var clickfuncs =[];
 
-function Update(){
+function update(){
 
 	jQuery.getJSON("/todos",function(data){tasks=data}).done(function(){clearScreen();writeTable();});
 
