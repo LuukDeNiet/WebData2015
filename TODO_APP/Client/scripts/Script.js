@@ -300,11 +300,11 @@ function clone(obj) {
 setInterval(function () {
  //console.log("Fetching the todo list from the server.");
  $.getJSON("/todos", function(data){
- 	if(!data.toString()==tasks.toString()){
+
  		tasks = data;
  		clearScreen();
  		writeTable();
- 	}
+
  });
  }, 2000);
 
