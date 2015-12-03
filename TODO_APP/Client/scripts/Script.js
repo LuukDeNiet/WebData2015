@@ -202,9 +202,9 @@ function writeTable(){
 	cell.classList.add("thincell");
 
 	tasklist.appendChild(tbl);
-	}
-
 }
+
+
 
 
 function popupFunctie(i){
