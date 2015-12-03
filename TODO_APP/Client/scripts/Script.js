@@ -20,7 +20,7 @@ function readNewTask(){
 	
 
 	if (correctform() ){
-		jQuery.ajax("../../addtodo?taskname="+taskname+"&important="+important+"&reminder="+reminder+"&deadline="+deadline+"&notes="+notes);
+		jQuery.ajax("/addtodo?taskname="+taskname+"&important="+important+"&reminder="+reminder+"&deadline="+deadline+"&notes="+notes);
 	
 		form.reset();
 		update();
@@ -62,7 +62,7 @@ function Update(){
 }
 
 function deleteTask(i){
-	jQuery.ajax("../../deletetodo?number="+i).done(function(){update();});
+	jQuery.ajax("/deletetodo?number="+i).done(function(){update();});
 }
 
 function clearScreen(){
@@ -74,15 +74,15 @@ function clearScreen(){
 }
 
 function sortImportance(){
-	jQuery.ajax("../../sortImportance");
+	jQuery.ajax("/sortImportance");
 }
 
 function sortDate(){
-	jQuery.ajax("../../sortDate");
+	jQuery.ajax("/sortDate");
 }
 
 function toggleDone(i){
-	jQuery.ajax("../../toggleDone?number="+i);
+	jQuery.ajax("/toggleDone?number="+i);
 }
 
 function writeTable(){
@@ -254,7 +254,7 @@ function editTask(i){
 	var deadline = form.elements[5].value;
 	var notes = document.getElementById("NoteEdit").value;
 	
-	jQuery.ajax("../../updatetodo?number="+i+"&taskname="+taskname+"&important="+important+"&reminder="+reminder+"&deadline="+deadline+"&notes="+notes);
+	jQuery.ajax("/updatetodo?number="+i+"&taskname="+taskname+"&important="+important+"&reminder="+reminder+"&deadline="+deadline+"&notes="+notes);
 	
 }
 
