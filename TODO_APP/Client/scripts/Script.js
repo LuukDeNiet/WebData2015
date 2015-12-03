@@ -303,6 +303,7 @@ setInterval(function () {
  	if(data != allTasks()){
  		console.log(data);
  		console.log(allTasks());
+ 		console.log(data == allTasks());
  		tasks = data;
  		clearScreen();
  		writeTable();
