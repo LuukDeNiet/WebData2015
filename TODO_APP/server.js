@@ -138,7 +138,7 @@ function sortDate(res, req){
         todos.splice(index,1);
     }
 	todos = clone(sorted);
-	console.log("sorting by finished");
+	console.log("sorting by date finished");
 }
 
 function clone(obj) {
