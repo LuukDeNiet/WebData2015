@@ -87,125 +87,125 @@ function toggleDone(i){
 
 function writeTable(){
 	var tasklist = document.getElementById("Task");
-			var body = document.body,
-			tbl  = document.createElement('table');
-			tbl.classList.add("tasktable")
+	var body = document.body,
+	tbl  = document.createElement('table');
+	tbl.classList.add("tasktable")
 
-			for(var i = 0; i < tasks.length; i++){
-				//new row
-				var tr = tbl.insertRow();
-				if(tasks[i].done == true){
-					tr.classList.add("taskrowdone");
-				}
-				else if(tasks[i].important == true){
-					if( i%2 == 1){
-						tr.classList.add("taskrowimportant2");
-					}
-					else{
-						tr.classList.add("taskrowimportant1");
-					}
-				}else if( i%2 == 1){
-					tr.classList.add("taskrow2");
-				}else{
-					tr.classList.add("taskrow1");
-				}
-
-				//Name with link
-                var td = tr.insertCell();
-                
-                td.classList.add("taskcell");
-                var node = document.createElement("a");
-				node.href = "javascript:popupFunctie(" + i+ ");";
-				var textnode = document.createTextNode(tasks[i].taskname);
-				td.appendChild(node);
-				node.appendChild(textnode);
-				
-				//Important cell
-				var td = tr.insertCell();
-                td.appendChild(document.createTextNode(tasks[i].important));
-                td.classList.add("taskcell");
-				td.classList.add("thincell");
-				
-				//Reminder cell
-                var td = tr.insertCell();
-                td.appendChild(document.createTextNode(tasks[i].reminder));
-                td.classList.add("taskcell");
-				td.classList.add("thincell");
-				
-				//Deadline cell
-                var td = tr.insertCell();
-                td.appendChild(document.createTextNode(tasks[i].deadline));
-                td.classList.add("taskcell");
-				td.classList.add("widecell");
-				
-				//Done cell
-                var td = tr.insertCell();
-                td.classList.add("taskcell");
-				td.classList.add("thincell");
-				var node = document.createElement("input");
-				node.type = "checkbox";
-				if(tasks[i].done){
-					node.checked = "checked";
-	
-				}
-				
-				function createfunc(i){
-					return function(){toggleDone(i)};
-				}
-				
-				clickfuncs[i] = createfunc(i);
-				
-				node.addEventListener("click",clickfuncs[i]);
-				
-				td.appendChild(node);
-				}
-
-
-			var header = tbl.createTHead();
-			var row = header.insertRow(0);
-			
-			//Taskname header
-			var cell = row.insertCell(0);
-			cell.innerHTML = "<b>Taskname</b>";
-			cell.classList.add("taskcell");
-			
-			//Importance header
-			var cell = row.insertCell(1);
-			var node = document.createElement("a");
-			node.href = "javascript:sortImportance();";
-			var textnode = document.createTextNode("Important");
-			cell.appendChild(node);
-			node.appendChild(textnode);
-			cell.classList.add("taskcell");
-			cell.classList.add("thincell");
-			
-			//Reminder header
-			var cell = row.insertCell(2);
-			cell.innerHTML = "<b>Reminder</b>";
-			cell.classList.add("taskcell");
-			cell.classList.add("thincell");
-			
-			//Deadline header
-			var cell = row.insertCell(3);
-			var node = document.createElement("a");
-			node.href = "javascript:sortDate();";
-			var textnode = document.createTextNode("Deadline");
-			cell.appendChild(node);
-			node.appendChild(textnode);
-			cell.classList.add("taskcell");
-			cell.classList.add("widecell");
-			
-			//Done header
-			var cell = row.insertCell(4);
-			cell.innerHTML = "<b>Done</b>";
-			cell.classList.add("taskcell");
-			cell.classList.add("thincell");
-
-			tasklist.appendChild(tbl);
+	for(var i = 0; i < tasks.length; i++){
+		//new row
+		var tr = tbl.insertRow();
+		if(tasks[i].done == true){
+			tr.classList.add("taskrowdone");
+		}
+		else if(tasks[i].important == true){
+			if( i%2 == 1){
+				tr.classList.add("taskrowimportant2");
 			}
+			else{
+				tr.classList.add("taskrowimportant1");
+			}
+		}else if( i%2 == 1){
+			tr.classList.add("taskrow2");
+		}else{
+			tr.classList.add("taskrow1");
+		}
 
+		//Name with link
+        var td = tr.insertCell();
+              
+        td.classList.add("taskcell");
+        var node = document.createElement("a");
+		node.href = "javascript:popupFunctie(" + i+ ");";
+		var textnode = document.createTextNode(tasks[i].taskname);
+		td.appendChild(node);
+		node.appendChild(textnode);
+		
+		//Important cell
+		var td = tr.insertCell();
+        td.appendChild(document.createTextNode(tasks[i].important));
+        td.classList.add("taskcell");
+		td.classList.add("thincell");
+				
+		//Reminder cell
+        var td = tr.insertCell();
+        td.appendChild(document.createTextNode(tasks[i].reminder));
+        td.classList.add("taskcell");
+		td.classList.add("thincell");
+				
+		//Deadline cell
+        var td = tr.insertCell();
+        td.appendChild(document.createTextNode(tasks[i].deadline));
+        td.classList.add("taskcell");
+		td.classList.add("widecell");
+				
+		//Done cell
+        var td = tr.insertCell();
+        td.classList.add("taskcell");
+		td.classList.add("thincell");
+		var node = document.createElement("input");
+		node.type = "checkbox";
+		if(tasks[i].done){
+			node.checked = "checked";
+	
+		}
+				
+		function createfunc(i){
+			return function(){toggleDone(i)};
+		}
+				
+		clickfuncs[i] = createfunc(i);
+				
+		node.addEventListener("click",clickfuncs[i]);
+				
+		td.appendChild(node);
 	}
+
+
+	var header = tbl.createTHead();
+	var row = header.insertRow(0);
+			
+	//Taskname header
+	var cell = row.insertCell(0);
+	cell.innerHTML = "<b>Taskname</b>";
+	cell.classList.add("taskcell");
+			
+	//Importance header
+	var cell = row.insertCell(1);
+	var node = document.createElement("a");
+	node.href = "javascript:sortImportance();";
+	var textnode = document.createTextNode("Important");
+	cell.appendChild(node);
+	node.appendChild(textnode);
+	cell.classList.add("taskcell");
+	cell.classList.add("thincell");
+			
+	//Reminder header
+	var cell = row.insertCell(2);
+	cell.innerHTML = "<b>Reminder</b>";
+	cell.classList.add("taskcell");
+	cell.classList.add("thincell");
+			
+	//Deadline header
+	var cell = row.insertCell(3);
+	var node = document.createElement("a");
+	node.href = "javascript:sortDate();";
+	var textnode = document.createTextNode("Deadline");
+	cell.appendChild(node);
+	node.appendChild(textnode);
+	cell.classList.add("taskcell");
+	cell.classList.add("widecell");
+			
+	//Done header
+	var cell = row.insertCell(4);
+	cell.innerHTML = "<b>Done</b>";
+	cell.classList.add("taskcell");
+	cell.classList.add("thincell");
+
+	tasklist.appendChild(tbl);
+	}
+
 }
+
 
 function popupFunctie(i){
 	var task = tasks[i];

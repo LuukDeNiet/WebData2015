@@ -173,16 +173,3 @@ function clone(obj) {
     throw new Error("Unable to copy obj! Its type isn't supported.");
 }
 
-
-//email reminder script here
-setInterval(function () {
-	var nu = new Date(Date.now());
-	var datumstring = nu.getUTCFullYear()+"-"+(nu.getUTCMonth()+1)+"-"+(nu.getUTCDate()+1);
- 	for (taken in todos){
- 		if(taken.deadline == datumstring){
- 			//sendEmail(taken);
- 		}
- 	}
-	});
-}, 1000*60*60*24);
-
