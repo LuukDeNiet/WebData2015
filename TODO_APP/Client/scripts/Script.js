@@ -300,7 +300,7 @@ function clone(obj) {
 setInterval(function () {
  //console.log("Fetching the todo list from the server.");
  $.getJSON("/todos", function(data){
- 	if(true )//equals methode hier
+ 	if(true ){//equals methode hier
  		tasks = data;
  		clearScreen();
  		writeTable();
