@@ -47,8 +47,7 @@ app.get("/sortDate",sortDate);
 
 
 var todos = [];
-var task1 = new todoTask();
-task1.queryDatabase(1);
+var task1 = readTask(1);
 todos.push(task1);
 
 function todoTask(taskname,important,reminder,deadline,notes){
@@ -64,42 +63,43 @@ function todoTask(taskname,important,reminder,deadline,notes){
 		this.done = true;
 	}
 	
-	this.queryDatabase = function(ToDoItemId){
-		this.ToDoItemId = ToDoItemId;
-		var title;
-		connection.query('SELECT Title, Notes, DueDate, Completed, Priority, Reminder FROM ToDoItem WHERE ToDoItemId =' + ToDoItemId, function(err, rows, fields) {
+};
+
+function readTask(ToDoItemId){
+	connection.query('SELECT Title, Notes, DueDate, Completed, Priority, Reminder FROM ToDoItem WHERE ToDoItemId =' + ToDoItemId, function(err, rows, fields) {
 			if (!err){
 				console.log("solution found");
-				title = rows[0].Title;
-				this.taskname = title;
+				var deadline = rows[0].DueDate; 
+				var notes = rows[0].Notes;
+				var important;
+				var reminder;
+				var done;
+				if(rows[0].Priority !== 0){
+					important = true;
+				}
+				else{
+					important = false;
+				}
+				if(rows[0].Reminder !== 0){
+					 reminder = true;
+				}
+				else{
+					reminder = false;
+				}
+				if(rows[0].Completed !== 0){
+					 done = true;
+				}
+				else{
+					done = false;
+				}
+				res = new todoTask(rows[0].Title, important, reminder, deadline, notes);
+				res.ToDoItemId = ToDoItemId;
+				return new todoTask(rows[0].Title,)
 			}
 			else
 				console.log('Error while performing Query.');
 		});
-		this.taskname = title;
-		/*this.deadline = taskrows.DueDate; 
-		this.notes = taskrows.Notes;
-		if(taskrows.Priority !== 0){
-			this.important = true;
-		}
-		else{
-			this.important = false;
-		}
-		if(taskrows.Reminder !== 0){
-			this.reminder = true;
-		}
-		else{
-			this.reminder = false;
-		}
-		if(taskrows.Completed !== 0){
-			this.done = true;
-		}
-		else{
-			this.done = false;
-		}
-		*/
-	}
-};
+}
 
 function addTask(req, res) {
 	var url_parts = url.parse(req.url, true);
