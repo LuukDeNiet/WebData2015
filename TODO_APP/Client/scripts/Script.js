@@ -2,7 +2,7 @@ var tasks = [];
 
 function allTasks(){
 	return tasks;
-}
+};
 
 function todoTask(taskname,important,reminder,deadline,notes){
 	this.taskname = taskname;//string
@@ -11,7 +11,7 @@ function todoTask(taskname,important,reminder,deadline,notes){
 	this.deadline = deadline; 
 	this.notes = notes; //string
 	this.done = false; // boolean
-}
+};
 
 function readNewTask(){
 
@@ -32,7 +32,7 @@ function readNewTask(){
 		alert("Form not filled in correctly");
 	}
 	
-}
+};
 
 function correctform(){
 	var form = document.getElementById("frm1");
@@ -55,7 +55,7 @@ function correctform(){
 	correct = checkboxes && strings && deadlinetest;
 
 	return correct;
-}
+};
 
 var clickfuncs =[];
 
@@ -63,11 +63,11 @@ function update(){
 
 	jQuery.getJSON("/todos",function(data){tasks=data}).done(function(){clearScreen();writeTable();});
 
-}
+};
 
 function deleteTask(i){
 	jQuery.ajax("/deletetodo?number="+i).done(function(){update();});
-}
+};
 
 function clearScreen(){
 	var tasklist = document.getElementById("Task");
@@ -75,19 +75,19 @@ function clearScreen(){
 	while(tasklist.firstChild){
 		tasklist.removeChild(tasklist.firstChild);
 	}
-}
+};
 
 function sortImportance(){
 	jQuery.ajax("/sortImportance");
-}
+};
 
 function sortDate(){
 	jQuery.ajax("/sortDate");
-}
+};
 
 function toggleDone(i){
 	jQuery.ajax("/toggleDone?number="+i);
-}
+};
 
 function writeTable(){
 	var tasklist = document.getElementById("Task");
@@ -156,7 +156,7 @@ function writeTable(){
 		function createfunc(i){
 			return function(){
 				toggleDone(i);
-				console.log("Clicked done checkbox of todo "+i)
+				console.log("Clicked done checkbox of todo "+i);
 			};
 		}
 				
@@ -209,7 +209,7 @@ function writeTable(){
 	cell.classList.add("thincell");
 
 	tasklist.appendChild(tbl);
-}
+};
 
 
 
@@ -243,15 +243,15 @@ function popupFunctie(i){
 	else{
 		document.getElementsByName("Reminderedit")[1].checked = true;
 	}
-}
+};
 
-window.onload = update()
+window.onload = update();
 
 function emptyPopup(){
 	var popup = document.getElementById("popup");
 	popup.classList.remove("popup");
 	popup.innerHTML = "";
-}
+};
 
 function editTask(i){
 	var form = document.getElementById("editfrm");
@@ -263,7 +263,7 @@ function editTask(i){
 	
 	jQuery.ajax("/updatetodo?number="+i+"&taskname="+taskname+"&important="+important+"&reminder="+reminder+"&deadline="+deadline+"&notes="+notes);
 	
-}
+};
 
 function clone(obj) {
     // Handle the 3 simple types, and null or undefined
@@ -295,16 +295,16 @@ function clone(obj) {
     }
 
     throw new Error("Unable to copy obj! Its type isn't supported.");
-}
+};
 
 setInterval(function () {
  //console.log("Fetching the todo list from the server.");
+
  $.getJSON("/todos", function(data){
- 	if(true ){//equals methode hier
- 		tasks = data;
- 		clearScreen();
- 		writeTable();
- 	}
+ 	if(JSON.stringify(data) !== JSON.stringify(tasks) ){//equals methode hier
+ 		console.log("Update screen");
+ 		update();
+ 	}else{console.log("Not screen update")}
  });
  }, 2000);
 
