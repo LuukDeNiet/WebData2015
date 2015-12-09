@@ -303,9 +303,7 @@ setInterval(function () {
  $.getJSON("/todos", function(data){
  	if(JSON.stringify(data) !== JSON.stringify(tasks) ){//equals methode hier
  		console.log("Update screen");
- 		tasks = data;
- 		clearScreen();
- 		writeTable();
+ 		update();
  	}else{console.log("Not screen update")}
  });
  }, 2000);
