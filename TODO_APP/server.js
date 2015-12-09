@@ -48,6 +48,8 @@ app.get("/sortDate",sortDate);
 
 var todos = [];
 
+readTask(1);
+
 function todoTask(taskname,important,reminder,deadline,notes){
 	var ToDoItemId;
 	this.taskname = taskname;//string
