@@ -3,6 +3,17 @@ var express = require("express");
 var url = require("url");
 var http = require("http");
 var fs = require("fs");
+var mysql = require('mysql');
+
+/*Connect to MySQL database */
+var connection = mysql.createConnection({
+  host     : 'localhost',
+  user     : 'root',
+  password : 'webdata',
+  database : 'TODO_APP'
+});
+
+connection.connect();
 
 var port = 3000;
 var app = express();
@@ -36,10 +47,12 @@ app.get("/sortDate",sortDate);
 
 
 var todos = [];
-var task1 = new todoTask("Call grandma",true,false,"2015-12-02","");
+var task1 = new todoTask();
+task1.queryDatabase(1);
 todos.push(task1);
 
 function todoTask(taskname,important,reminder,deadline,notes){
+	var ToDoItemId;
 	this.taskname = taskname;//string
 	this.important = important; // boolean
 	this.reminder = reminder; // boolean
@@ -51,6 +64,36 @@ function todoTask(taskname,important,reminder,deadline,notes){
 		this.done = true;
 	}
 	
+	this.queryDatabase = function(ToDoItemId){
+		this.ToDoItemId = ToDoItemId;
+		connection.query('SELECT Title, Notes, DueDate, Completed, Priority, Reminder FROM ToDoItem WHERE ToDoItemId =' ToDoItemId, function(err, rows, fields) {
+			if (!err){
+				this.taskname = rows[0].Title;
+				this.deadline = rows[0].DueDate; 
+				this.notes = rows[0].Notes;
+				if(rows[0].Priority !== 0){
+					this.important = true;
+				}
+				else{
+					this.important = false;
+				}
+				if(rows[0].Reminder !== 0){
+					this.reminder = true;
+				}
+				else{
+					this.reminder = false;
+				}
+				if(rows[0].Completed !== 0){
+					this.done = true;
+				}
+				else{
+					this.done = false;
+				}
+			}
+			else
+				console.log('Error while performing Query.');
+		});
+	}
 };
 
 function addTask(req, res) {
