@@ -68,9 +68,9 @@ function todoTask(taskname,important,reminder,deadline,notes){
 		connection.query('SELECT Title, Notes, DueDate, Completed, Priority, Reminder FROM ToDoItem WHERE ToDoItemId =' + ToDoItemId, function(err, rows, fields) {
 			if (!err){
 				console.log("solution found");
-				this.taskname = rows[0].Title;
-				this.deadline = rows[0].DueDate; 
-				this.notes = rows[0].Notes;
+				this.this.taskname = rows[0].Title;
+				this.this.deadline = rows[0].DueDate; 
+				this.this.notes = rows[0].Notes;
 				if(rows[0].Priority !== 0){
 					this.important = true;
 				}
