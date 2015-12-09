@@ -70,7 +70,7 @@ function readTask(ToDoItemId){
 			if (!err){
 				console.log("solution found");
 				var taskname = rows[0].Title;
-				var deadline = rows[0].DueDate.substr(0, 10); 
+				var deadline = rows[0].DueDate.toISOString().slice(0,10).replace(/-/g,""); 
 				var notes = rows[0].Notes;
 				var important;
 				var reminder;
