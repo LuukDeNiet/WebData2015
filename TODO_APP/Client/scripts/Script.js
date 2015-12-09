@@ -156,7 +156,7 @@ function writeTable(){
 		function createfunc(i){
 			return function(){
 				toggleDone(i);
-				console.log("Clicked done checkbox of todo "+i)
+				console.log("Clicked done checkbox of todo "+i);
 			};
 		}
 				
