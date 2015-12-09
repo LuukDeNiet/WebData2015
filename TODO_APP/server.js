@@ -111,7 +111,7 @@ function sortImportance(req, res){
 	var high = [];
 	var normal = [];
 	for(var i = 0; i < todos.length; i++){
-		if(todos[i].important == true){
+		if(todos[i].important){
 			high.push(todos[i]);
 		} else{
 			normal.push(todos[i]);
