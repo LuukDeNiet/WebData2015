@@ -94,7 +94,7 @@ function readTask(ToDoItemId){
 				}
 				res = new todoTask(rows[0].Title, important, reminder, deadline, notes);
 				res.ToDoItemId = ToDoItemId;
-				return new todoTask(rows[0].Title,)
+				return res;
 			}
 			else
 				console.log('Error while performing Query.');
