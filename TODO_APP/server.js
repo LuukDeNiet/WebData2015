@@ -47,8 +47,8 @@ app.get("/sortDate",sortDate);
 
 
 var todos = [];
-var task1 = readTask(1);
-todos.push(task1);
+//var task1 = readTask(1);
+//todos.push(task1);
 
 function todoTask(taskname,important,reminder,deadline,notes){
 	var ToDoItemId;
