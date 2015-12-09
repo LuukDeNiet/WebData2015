@@ -67,7 +67,7 @@ function todoTask(taskname,important,reminder,deadline,notes){
 	this.queryDatabase = function(ToDoItemId){
 		this.ToDoItemId = ToDoItemId;
 		var taskrows;
-		connection.query('SELECT Title, Notes, DueDate, Completed, Priority, Reminder FROM ToDoItem WHERE ToDoItemId =' + ToDoItemId'', function(err, rows, fields) {
+		connection.query('SELECT Title, Notes, DueDate, Completed, Priority, Reminder FROM ToDoItem WHERE ToDoItemId =' + ToDoItemId, function(err, rows, fields) {
 			if (!err){
 				taskrows = rows;
 			}
