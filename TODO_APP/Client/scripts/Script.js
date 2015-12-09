@@ -300,11 +300,46 @@ function clone(obj) {
 setInterval(function () {
  //console.log("Fetching the todo list from the server.");
  $.getJSON("/todos", function(data){
- 	if(true ){//equals methode hier
+ 	if(equalArray(tasks,data) ){//equals methode hier
+ 		console.log("Update screen")
  		tasks = data;
  		clearScreen();
  		writeTable();
  	}
  });
  }, 2000);
+
+function equalArray(A,B){
+	if(A==null || B==null){
+		return false;
+	}
+	if(A.length!=B.length){
+		return false;
+	}
+	for(var i = 0; i<A.length; i++){
+		if(!equalTodo(A.i,B.i)){
+			return false
+		}
+	}
+	return true;
+}
+
+function equalTodo(o1, o2){
+    for(var p in o1){
+        if(o1.hasOwnProperty(p)){
+            if(o1[p] !== o2[p]){
+                return false;
+            }
+        }
+    }
+    for(var p in o2){
+        if(o2.hasOwnProperty(p)){
+            if(o1[p] !== o2[p]){
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
 
