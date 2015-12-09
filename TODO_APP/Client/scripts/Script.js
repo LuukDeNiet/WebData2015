@@ -55,7 +55,7 @@ function correctform(){
 	correct = checkboxes && strings && deadlinetest;
 
 	return correct;
-}
+};
 
 var clickfuncs =[];
 
@@ -63,11 +63,11 @@ function update(){
 
 	jQuery.getJSON("/todos",function(data){tasks=data}).done(function(){clearScreen();writeTable();});
 
-}
+};
 
 function deleteTask(i){
 	jQuery.ajax("/deletetodo?number="+i).done(function(){update();});
-}
+};
 
 function clearScreen(){
 	var tasklist = document.getElementById("Task");
@@ -75,19 +75,19 @@ function clearScreen(){
 	while(tasklist.firstChild){
 		tasklist.removeChild(tasklist.firstChild);
 	}
-}
+};
 
 function sortImportance(){
 	jQuery.ajax("/sortImportance");
-}
+};
 
 function sortDate(){
 	jQuery.ajax("/sortDate");
-}
+};
 
 function toggleDone(i){
 	jQuery.ajax("/toggleDone?number="+i);
-}
+};
 
 function writeTable(){
 	var tasklist = document.getElementById("Task");
@@ -209,7 +209,7 @@ function writeTable(){
 	cell.classList.add("thincell");
 
 	tasklist.appendChild(tbl);
-}
+};
 
 
 
@@ -243,15 +243,15 @@ function popupFunctie(i){
 	else{
 		document.getElementsByName("Reminderedit")[1].checked = true;
 	}
-}
+};
 
-window.onload = update()
+window.onload = update();
 
 function emptyPopup(){
 	var popup = document.getElementById("popup");
 	popup.classList.remove("popup");
 	popup.innerHTML = "";
-}
+};
 
 function editTask(i){
 	var form = document.getElementById("editfrm");
@@ -263,7 +263,7 @@ function editTask(i){
 	
 	jQuery.ajax("/updatetodo?number="+i+"&taskname="+taskname+"&important="+important+"&reminder="+reminder+"&deadline="+deadline+"&notes="+notes);
 	
-}
+};
 
 function clone(obj) {
     // Handle the 3 simple types, and null or undefined
@@ -295,7 +295,7 @@ function clone(obj) {
     }
 
     throw new Error("Unable to copy obj! Its type isn't supported.");
-}
+};
 
 setInterval(function () {
  //console.log("Fetching the todo list from the server.");
@@ -323,7 +323,7 @@ function equalArray(A,B){
 		}
 	}
 	return true;
-}
+};
 
 function equalTodo(o1, o2){
     for(var p in o1){
@@ -335,6 +335,6 @@ function equalTodo(o1, o2){
     }
 
     return true;
-}
+};
 
 

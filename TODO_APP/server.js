@@ -139,7 +139,7 @@ function sortDate(req, res){
     }
 	todos = clone(sorted);
 	console.log("sorting by date finished");
-}
+};
 
 function clone(obj) {
     // Handle the 3 simple types, and null or undefined
@@ -171,5 +171,5 @@ function clone(obj) {
     }
 
     throw new Error("Unable to copy obj! Its type isn't supported.");
-}
+};
 
