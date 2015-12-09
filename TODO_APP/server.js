@@ -47,9 +47,9 @@ app.get("/sortDate",sortDate);
 
 
 var todos = [];
-var task1 = readTask(1);
-console.log(task1.taskname);
-//todos.push(task1);
+var task1 = todoTask();
+task1.readDatabase(1);
+todos.push(task1);
 
 function todoTask(taskname,important,reminder,deadline,notes){
 	var ToDoItemId;
@@ -64,9 +64,40 @@ function todoTask(taskname,important,reminder,deadline,notes){
 		this.done = true;
 	}
 	
+	this.readDatabase(ToDoItemId){
+		connection.query('SELECT Title, Notes, DueDate, Completed, Priority, Reminder FROM ToDoItem WHERE ToDoItemId =' + ToDoItemId, function(err, rows, fields) {
+			if (!err){
+				console.log("solution found");
+				this.deadline = rows[0].DueDate; 
+				this.notes = rows[0].Notes;
+				if(rows[0].Priority !== 0){
+					this.important = true;
+				}
+				else{
+					this.important = false;
+				}
+				if(rows[0].Reminder !== 0){
+					 this.reminder = true;
+				}
+				else{
+					this.reminder = false;
+				}
+				if(rows[0].Completed !== 0){
+					 this.done = true;
+				}
+				else{
+					this.done = false;
+				}
+				this.ToDoItemId = ToDoItemId;
+				return res;
+			}
+			else
+				console.log('Error while performing Query.');
+		});
+	}
 };
 
-function readTask(ToDoItemId){
+function readTask(ToDoItemId,res){
 	connection.query('SELECT Title, Notes, DueDate, Completed, Priority, Reminder FROM ToDoItem WHERE ToDoItemId =' + ToDoItemId, function(err, rows, fields) {
 			if (!err){
 				console.log("solution found");
