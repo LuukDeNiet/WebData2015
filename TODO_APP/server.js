@@ -100,13 +100,13 @@ function toggleDone(req, res) {
 
 };
 
-function updateTask(res, req){
+function updateTask(req, res){
 	console.log("updating a todo");
-	addTask(res, req);
-	deleteTask(res, req);
+	addTask(req, res);
+	deleteTask(req, res);
 };
 
-function sortImportance(res, req){
+function sortImportance(req, res){
 	console.log("sorting by importance");
 	var high = [];
 	var normal = [];
@@ -121,7 +121,7 @@ function sortImportance(res, req){
 	todos = high.concat(normal);
 };
 
-function sortDate(res, req){
+function sortDate(req, res){
 	console.log("sorting by date");
 	var sorted = [];
     var totaal = todos.length;
