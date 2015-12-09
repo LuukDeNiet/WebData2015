@@ -70,7 +70,7 @@ function readTask(ToDoItemId){
 			if (!err){
 				console.log("solution found");
 				var taskname = rows[0].Title;
-				var deadline = rows[0].DueDate; 
+				var deadline = rows[0].DueDatestr.substring(0, 10); 
 				var notes = rows[0].Notes;
 				var important;
 				var reminder;
@@ -100,7 +100,7 @@ function readTask(ToDoItemId){
 			else
 				console.log('Error while performing Query.');
 		});
-}
+};
 
 function addTask(req, res) {
 	var url_parts = url.parse(req.url, true);
