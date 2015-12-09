@@ -90,7 +90,6 @@ function todoTask(taskname,important,reminder,deadline,notes){
 					this.done = false;
 				}
 				this.ToDoItemId = ToDoItemId;
-				return res;
 			}
 			else
 				console.log('Error while performing Query.');
