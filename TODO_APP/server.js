@@ -93,7 +93,7 @@ function readTask(ToDoItemId){
 				}
 				res = new todoTask(taskname, important, reminder, deadline, notes);
 				res.ToDoItemId = ToDoItemId;
-				todos.push(res);)
+				todos.push(res);
 			}
 			else
 				console.log('Error while performing Query.');
