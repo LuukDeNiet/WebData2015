@@ -308,7 +308,7 @@ setInterval(function () {
  		writeTable();
  	}else{console.log("Not screen update")}
  });
- }, 2000);
+ }, 5000);
 
 function equalArray(A,B){
 	if(A==null || B==null){
