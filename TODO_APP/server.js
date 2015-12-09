@@ -3,6 +3,17 @@ var express = require("express");
 var url = require("url");
 var http = require("http");
 var fs = require("fs");
+var mysql = require('mysql');
+
+/*Connect to MySQL database */
+var connection = mysql.createConnection({
+  host     : 'localhost',
+  user     : 'root',
+  password : 'webdata',
+  database : 'TODO_APP'
+});
+
+connection.connect();
 
 var port = 3000;
 var app = express();
@@ -36,10 +47,11 @@ app.get("/sortDate",sortDate);
 
 
 var todos = [];
-var task1 = new todoTask("Call grandma",true,false,"2015-12-02","");
-todos.push(task1);
+
+readTask(1);
 
 function todoTask(taskname,important,reminder,deadline,notes){
+	var ToDoItemId;
 	this.taskname = taskname;//string
 	this.important = important; // boolean
 	this.reminder = reminder; // boolean
@@ -51,6 +63,43 @@ function todoTask(taskname,important,reminder,deadline,notes){
 		this.done = true;
 	}
 	
+};
+
+function readTask(ToDoItemId){
+	connection.query('SELECT Title, Notes, DueDate, Completed, Priority, Reminder FROM ToDoItem WHERE ToDoItemId =' + ToDoItemId, function(err, rows, fields) {
+			if (!err){
+				console.log("solution found");
+				var taskname = rows[0].Title;
+				var deadline = rows[0].DueDate.toISOString().slice(0,10);
+				var notes = rows[0].Notes;
+				var important;
+				var reminder;
+				var done;
+				if(rows[0].Priority !== 0){
+					important = true;
+				}
+				else{
+					important = false;
+				}
+				if(rows[0].Reminder !== 0){
+					 reminder = true;
+				}
+				else{
+					reminder = false;
+				}
+				if(rows[0].Completed !== 0){
+					 done = true;
+				}
+				else{
+					done = false;
+				}
+				res = new todoTask(taskname, important, reminder, deadline, notes);
+				res.ToDoItemId = ToDoItemId;
+				todos.push(res);
+			}
+			else
+				console.log('Error while performing Query.');
+		});
 };
 
 function addTask(req, res) {
