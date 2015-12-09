@@ -70,7 +70,8 @@ function todoTask(taskname,important,reminder,deadline,notes){
 		connection.query('SELECT Title, Notes, DueDate, Completed, Priority, Reminder FROM ToDoItem WHERE ToDoItemId =' + ToDoItemId, function(err, rows, fields) {
 			if (!err){
 				console.log("solution found");
-				title = rows[0].title;
+				title = rows[0].Title;
+				this.this.taskname = title;
 			}
 			else
 				console.log('Error while performing Query.');
