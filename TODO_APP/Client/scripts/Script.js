@@ -302,7 +302,7 @@ setInterval(function () {
 
  $.getJSON("/todos", function(data){
  	if(JSON.stringify(data) !== JSON.stringify(tasks) ){//equals methode hier
- 		console.log("Update screen")
+ 		console.log("Update screen");
  		tasks = data;
  		clearScreen();
  		writeTable();
@@ -319,7 +319,7 @@ function equalArray(A,B){
 	}
 	for(var i = 0; i<A.length; i++){
 		if(!equalTodo(A.i,B.i)){
-			return false
+			return false;
 		}
 	}
 	return true;
