@@ -299,7 +299,7 @@ function clone(obj) {
 
 setInterval(function () {
  //console.log("Fetching the todo list from the server.");
- if(ajax){ajax.abort()}
+
  $.getJSON("/todos", function(data){
  	if(JSON.stringify(data) !== JSON.stringify(tasks) ){//equals methode hier
  		console.log("Update screen")
