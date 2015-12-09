@@ -66,14 +66,16 @@ function todoTask(taskname,important,reminder,deadline,notes){
 	
 	this.queryDatabase = function(ToDoItemId){
 		this.ToDoItemId = ToDoItemId;
+		var title;
 		connection.query('SELECT Title, Notes, DueDate, Completed, Priority, Reminder FROM ToDoItem WHERE ToDoItemId =' + ToDoItemId, function(err, rows, fields) {
 			if (!err){
 				console.log("solution found");
+				title = rows[0].title;
 			}
 			else
 				console.log('Error while performing Query.');
 		});
-		this.taskname = rows[0].Title;
+		this.taskname = title;
 		/*this.deadline = taskrows.DueDate; 
 		this.notes = taskrows.Notes;
 		if(taskrows.Priority !== 0){
