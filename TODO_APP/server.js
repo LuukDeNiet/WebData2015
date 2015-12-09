@@ -64,7 +64,7 @@ function todoTask(taskname,important,reminder,deadline,notes){
 		this.done = true;
 	}
 	
-	this.readDatabase = function()(ToDoItemId){
+	this.readDatabase = function(ToDoItemId){
 		connection.query('SELECT Title, Notes, DueDate, Completed, Priority, Reminder FROM ToDoItem WHERE ToDoItemId =' + ToDoItemId, function(err, rows, fields) {
 			if (!err){
 				console.log("solution found");
