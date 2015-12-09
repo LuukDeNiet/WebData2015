@@ -47,9 +47,6 @@ app.get("/sortDate",sortDate);
 
 
 var todos = [];
-var task1 = readTask(1);
-console.log(task1.taskname);
-//todos.push(task1);
 
 function todoTask(taskname,important,reminder,deadline,notes){
 	var ToDoItemId;
@@ -70,6 +67,7 @@ function readTask(ToDoItemId){
 	connection.query('SELECT Title, Notes, DueDate, Completed, Priority, Reminder FROM ToDoItem WHERE ToDoItemId =' + ToDoItemId, function(err, rows, fields) {
 			if (!err){
 				console.log("solution found");
+				var taskname = rows[0].Title;
 				var deadline = rows[0].DueDate; 
 				var notes = rows[0].Notes;
 				var important;
@@ -93,9 +91,9 @@ function readTask(ToDoItemId){
 				else{
 					done = false;
 				}
-				res = new todoTask(rows[0].Title, important, reminder, deadline, notes);
+				res = new todoTask(taskname, important, reminder, deadline, notes);
 				res.ToDoItemId = ToDoItemId;
-				return res;
+				todos.push(res);)
 			}
 			else
 				console.log('Error while performing Query.');
