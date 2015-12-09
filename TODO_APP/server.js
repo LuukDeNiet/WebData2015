@@ -66,33 +66,35 @@ function todoTask(taskname,important,reminder,deadline,notes){
 	
 	this.queryDatabase = function(ToDoItemId){
 		this.ToDoItemId = ToDoItemId;
-		connection.query('SELECT Title, Notes, DueDate, Completed, Priority, Reminder FROM ToDoItem WHERE ToDoItemId =' + ToDoItemId, function(err, rows, fields) {
+		var taskrows;
+		connection.query('SELECT Title, Notes, DueDate, Completed, Priority, Reminder FROM ToDoItem WHERE ToDoItemId =' + ToDoItemId'', function(err, rows, fields) {
 			if (!err){
-				this.taskname = rows[0].Title;
-				this.deadline = rows[0].DueDate; 
-				this.notes = rows[0].Notes;
-				if(rows[0].Priority !== 0){
-					this.important = true;
-				}
-				else{
-					this.important = false;
-				}
-				if(rows[0].Reminder !== 0){
-					this.reminder = true;
-				}
-				else{
-					this.reminder = false;
-				}
-				if(rows[0].Completed !== 0){
-					this.done = true;
-				}
-				else{
-					this.done = false;
-				}
+				taskrows = rows;
 			}
 			else
 				console.log('Error while performing Query.');
 		});
+		this.taskname = taskrows[0].Title;
+		this.deadline = taskrows[0].DueDate; 
+		this.notes = taskrows[0].Notes;
+		if(taskrows[0].Priority !== 0){
+			this.important = true;
+		}
+		else{
+			this.important = false;
+		}
+		if(taskrows[0].Reminder !== 0){
+			this.reminder = true;
+		}
+		else{
+			this.reminder = false;
+		}
+		if(taskrows[0].Completed !== 0){
+			this.done = true;
+		}
+		else{
+			this.done = false;
+		}
 	}
 };
 
