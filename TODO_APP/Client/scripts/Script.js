@@ -300,12 +300,12 @@ function clone(obj) {
 setInterval(function () {
  //console.log("Fetching the todo list from the server.");
  $.getJSON("/todos", function(data){
- 	if(!equalArray(tasks,data) ){//equals methode hier
+ 	if(JSON.stringify(data) !== JSON.stringify(tasks)) ){//equals methode hier
  		console.log("Update screen")
  		tasks = data;
  		clearScreen();
  		writeTable();
- 	}
+ 	}else{console.log("Not screen update")}
  });
  }, 2000);
 
