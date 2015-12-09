@@ -2,7 +2,7 @@ var tasks = [];
 
 function allTasks(){
 	return tasks;
-}
+};
 
 function todoTask(taskname,important,reminder,deadline,notes){
 	this.taskname = taskname;//string
@@ -11,7 +11,7 @@ function todoTask(taskname,important,reminder,deadline,notes){
 	this.deadline = deadline; 
 	this.notes = notes; //string
 	this.done = false; // boolean
-}
+};
 
 function readNewTask(){
 
@@ -32,7 +32,7 @@ function readNewTask(){
 		alert("Form not filled in correctly");
 	}
 	
-}
+};
 
 function correctform(){
 	var form = document.getElementById("frm1");
