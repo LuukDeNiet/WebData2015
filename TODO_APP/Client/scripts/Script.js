@@ -310,31 +310,3 @@ setInterval(function () {
  });
  }, 2000);
 
-function equalArray(A,B){
-	if(A==null || B==null){
-		return false;
-	}
-	if(A.length!==B.length){
-		return false;
-	}
-	for(var i = 0; i<A.length; i++){
-		if(!equalTodo(A.i,B.i)){
-			return false;
-		}
-	}
-	return true;
-};
-
-function equalTodo(o1, o2){
-    for(var p in o1){
-        
-            if(o1[p] !== o2[p]){
-                return false;
-            }
-        
-    }
-
-    return true;
-};
-
-
