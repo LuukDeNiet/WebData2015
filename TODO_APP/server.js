@@ -71,7 +71,7 @@ function todoTask(taskname,important,reminder,deadline,notes){
 			if (!err){
 				console.log("solution found");
 				title = rows[0].Title;
-				this.this.taskname = title;
+				this.taskname = title;
 			}
 			else
 				console.log('Error while performing Query.');
